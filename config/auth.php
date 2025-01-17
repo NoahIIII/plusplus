@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'staff_users' => [
+            'driver' => 'session',
+            'provider' => 'staff_users_provider',
+        ],
+        'users' => [
+            'driver' => 'jwt',
+            'provider' => 'users_provider',
+        ],
     ],
 
     /*
@@ -61,6 +69,14 @@ return [
 
     'providers' => [
         'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'staff_users_provider' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\StaffUser::class,
+        ],
+        'users_provider' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],

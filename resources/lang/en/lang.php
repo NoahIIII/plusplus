@@ -1,0 +1,27 @@
+<?php
+
+return array (
+  'sign_in' => 'Sign in',
+  'enter_your_email_address_and_password_to_access_admin_panel' => 'Enter your email address and password to access admin panel.',
+  'email_address' => 'Email address',
+  'password' => 'Password',
+  'remember_me' => 'Remember Me',
+  'enter_email' => 'Enter email',
+  'enter_password' => 'Enter Password',
+  'all_rights_reserved' => 'All Rights Reserved',
+  'manage_users' => 'Manage Users',
+  'add_user' => 'Add User',
+  'add_users' => 'Add Users',
+  'users_list' => 'Users List',
+  'create_user' => 'Create User',
+  'name' => 'Name',
+  'full_name' => 'Full Name',
+  'email' => 'Email',
+  'submit' => 'Submit',
+  'phone' => 'Phone',
+  'status' => 'Status',
+  'email_verified' => 'Email Verified',
+  'users' => 'Users',
+  'not_verified' => 'Not Verified',
+  'active' => 'Active',
+);

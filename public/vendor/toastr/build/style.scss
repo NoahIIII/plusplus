@@ -1,0 +1,202 @@
+.toast-container .ngx-toastr {
+    position: relative;
+    width: 888px;
+    height: 79px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 60px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 5px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    box-shadow: 0 0 12px #999999;
+    color: #FFFFFF;
+  }
+  .toast-container .ngx-toastr:hover {
+    box-shadow: 0 0 12px #000000 ;
+    opacity: 1;
+    cursor: pointer ;
+  }
+
+
+  .toast-container {
+    pointer-events: none;
+    position: fixed;
+    z-index: 9999;
+  }
+  .toast-container * {
+    box-sizing: border-box;
+  }
+
+    .toast-message {
+      position: relative;
+      word-wrap: break-word;
+      background-color: #FFFFFF;
+      top: 2px;
+      width: 886px;
+      height: 75px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+  .message-boxy {
+    top: 2px;
+    width: 886px;
+    height: 75px;
+  }
+
+  .message-symbol {
+    background-color: #800017;
+    width: 79px;
+     height: 75px;
+     text-align: center;
+     position: relative;
+     float: left;
+     left: 0px;
+  }
+
+  .message-symbol i {
+    width: 28px;
+    height: 28px;
+    transform: translateY(0.7em);
+  }
+
+  .toast-text-container {
+    position: relative;
+    width:886px;
+    border-style:solid;
+    border-color: #FFAE15;
+    border-width:2px;
+    left: 0px;
+    height: 75px;
+    background-color: transparent;
+    z-index: 10;
+  }
+
+  .message-text {
+    line-height: 75px;
+    border-style:solid;
+    left: 79px;
+    height: 75px;
+    border-color: #157EF9;
+    border-width:2px;
+     width: 500px;
+     letter-spacing: 0px;
+     text-align: left;
+     text-indent: 10px;
+     font-weight: bold;
+     font-size: 18px;
+     color: #555555;
+     z-index: 10;
+  }
+  .btncontainer {
+    background-color: pink;
+    position: relative;
+    float:right;
+    padding: 0 20px;
+    z-index: 20;
+  }
+  .reloadpage {
+    color: #157EF9;
+    font-weight: bold;
+    opacity: 1;
+    z-index: 20;
+  }
+  .reloadpage:hover {
+      opacity: 0.8;
+  }
+
+  .toast-close-button {
+    border: none;
+    top: 27px;
+    right: 10px;
+    float: right;
+    background-color: #FFFFFF;
+    width: 25px !important;
+    height: 25px !important;
+    opacity: 1;
+    z-index: 10;
+  }
+
+  /*Additional properties for button version
+   iOS requires the button element instead of an anchor tag.
+   If you want the anchor version, it requires `href="#"`.*/
+  button.toast-close-button {
+    cursor: pointer;
+    border: none;
+    background-color: #FFFFFF;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(255,255,255)' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'/%3E%3C/svg%3E");
+    width: 25px !important;
+    height: 25px !important;
+    opacity: 1;
+    z-index: 10;
+  }
+
+  .toast-close-button:hover,
+  .toast-close-button:focus {
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 1;
+  }
+
+
+
+
+  /* https://github.com/FortAwesome/Font-Awesome-Pro/blob/master/advanced-options/raw-svg/regular/info-circle.svg */
+  .toast-info {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(255,255,255)' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'/%3E%3C/svg%3E");
+    width: 28.74px;
+    height: 28.74px;
+    padding: 25px;
+  }
+  /* https://github.com/FortAwesome/Font-Awesome-Pro/blob/master/advanced-options/raw-svg/regular/times-circle.svg */
+  .toast-error {
+    background-image: none;
+  }
+  /* https://github.com/FortAwesome/Font-Awesome-Pro/blob/master/advanced-options/raw-svg/regular/check.svg */
+  .toast-success {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(255,255,255)' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'/%3E%3C/svg%3E");
+    width: 28.74px;
+    height: 70px;
+    justify-self: center !important;
+  }
+  /* https://github.com/FortAwesome/Font-Awesome-Pro/blob/master/advanced-options/raw-svg/regular/exclamation-triangle.svg */
+  .toast-warning {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(255,255,255)' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'/%3E%3C/svg%3E");
+    width: 28.74px;
+    height: 28.74px;
+  }
+
+  .toast-container.toast-top-full-width .ngx-toastr,
+  .toast-container.toast-bottom-full-width .ngx-toastr {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ngx-toastr {
+    background-color: #030303;
+    pointer-events: auto;
+  }
+  .toast-success {
+    background-color: #4C6A13;
+  }
+  .toast-error {
+    background-color: #800017;
+  }
+  .toast-info {
+    background-color: #555555;
+  }
+  .toast-warning {
+    background-color: #FFAE15;
+  }
+  .toast-progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    background-color: #000000;
+    opacity: 0.4;
+  }
