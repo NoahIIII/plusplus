@@ -1,21 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Create User')
+@section('title', 'Edit User')
 @section('content')
     <div class="iq-card">
         <div class="iq-card-header d-flex justify-content-between">
             <div class="iq-header-title">
-                <h4 class="card-title">{{ ___('Create User') }}</h4>
+                <h4 class="card-title">{{ ___('Edit User') }}</h4>
             </div>
         </div>
         <div class="iq-card-body">
-            <form id="userForm" data-action="{{ route('users.store') }}" action="{{ route('users.store') }}" method="POST"
-                enctype="multipart/form-data">
+            {{-- @dd(getImageUrl($user->user_img)); --}}
+            <form id="userForm" data-action="{{ route('users.update', $user) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="form-group row align-items-center">
                     <div class="col-md-12">
                         <div class="profile-img-edit">
-                            <img class="profile-pic" src="{{ asset('assets/images/user/default_user.png') }}" alt="profile-pic">
+                            <img class="profile-pic" src="{{ getImageUrl($user->user_img) ?? asset('assets/images/user/default_user.png') }}" alt="profile-pic">
                             <div class="p-image">
                                 <i class="ri-pencil-line upload-button"></i>
                                 <input class="file-upload" name="user_img" type="file" accept="image/*" />
@@ -23,15 +24,16 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col">
                         <label for="name">{{ ___('Full Name') }}*</label>
-                        <input name="name" type="text" class="form-control" id="name"
+                        <input name="name" type="text" class="form-control" id="name" value="{{ $user->name }}"
                             placeholder="{{ ___('Full Name') }}">
                     </div>
                     <div class="col">
                         <label for="email">{{ ___('Email') }}*</label>
-                        <input name="email" type="text" class="form-control" id="email"
+                        <input name="email" type="text" class="form-control" id="email" value="{{ $user->email }}"
                             placeholder="{{ ___('Email') }}">
                     </div>
                 </div>
@@ -39,13 +41,13 @@
                 <div class="row">
                     <div class="col">
                         <label for="phone">{{ ___('Phone') }}</label>
-                        <input name="phone" type="text" class="form-control" id="phone"
+                        <input name="phone" type="text" class="form-control" id="phone" value="{{ $user->phone }}"
                             placeholder="{{ ___('Phone') }}">
                     </div>
                     <div class="col">
                         <label for="password">{{ ___('Password') }}*</label>
                         <input name="password" type="text" class="form-control" id="password"
-                            placeholder="{{ ___('Password') }}">
+                            placeholder="{{ ___('Leave blank to keep the current password') }}">
                     </div>
                 </div>
                 <br>
@@ -53,7 +55,7 @@
                     <div class="col">
                         <div class="custom-control custom-switch custom-control-inline">
                             <input name="status" value="1" type="checkbox" class="custom-control-input"
-                                id="customSwitch2" checked="">
+                                id="customSwitch2" @if($user->status) checked="" @endif>
                             <label class="custom-control-label" value="1"
                                 for="customSwitch2">{{ ___('Status') }}*</label>
                         </div>
@@ -91,7 +93,7 @@
                 processData: false,
                 success: function(response) {
                     console.log(response);
-                    window.location.href = '{{ route('users.create') }}';
+                    window.location.href = '{{ route('users.edit', $user->user_id) }}';
                     toastr.success('{{ __('messages.added') }}');
                 },
                 error: function(xhr, status, error) {

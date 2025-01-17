@@ -24,4 +24,13 @@ return array (
   'users' => 'Users',
   'not_verified' => 'Not Verified',
   'active' => 'Active',
+  'image' => 'Image',
+  'delete' => 'Delete',
+  'inactive' => 'Inactive',
+  'user_image' => 'User Image',
+  'join_date' => 'Join Date',
+  'edit' => 'Edit',
+  'edit_user' => 'Edit User',
+  'leave_blank_to_keep_the_current_password' => 'Leave blank to keep the current password',
+  'sign_out' => 'Sign out',
 );

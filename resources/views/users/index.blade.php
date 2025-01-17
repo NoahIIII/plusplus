@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Users')
 @section('content')
-    <div class="row">
-        <div class="col-sm-12">
+<div class="row">
+    <div class="col-sm-12">
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
@@ -11,19 +11,16 @@
                 </div>
                 <div class="iq-card-body">
                     <div id="table" class="table-editable">
-                        <span class="table-add float-right mb-3 mr-2">
-                            <button class="btn btn-sm iq-bg-success">
-                                <i class="ri-add-fill"><span class="pl-1">Add New</span></i>
-                            </button>
-                        </span>
-                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                        <table id="user-list-table" class="table table-striped table-borderless mt-4" role="grid" aria-describedby="user-list-page-info">
                             <thead>
                                 <tr>
+                                    <th>{{ ___('User Image') }}</th>
                                     <th>{{ ___('Name') }}</th>
                                     <th>{{ ___('Email') }}</th>
                                     <th>{{ ___('Phone') }}</th>
                                     <th>{{ ___('Email Verified') }}</th>
                                     <th>{{ ___('Status') }}</th>
+                                    <th>{{ ___('Join Date') }}</th>
                                     <th></th>
 
                                 </tr>
@@ -31,28 +28,42 @@
                             <tbody>
                                 @foreach($users as $user)
                                 <tr>
-                                    <td contenteditable="true">{{ $user->name }}</td>
-                                    <td contenteditable="true">{{ $user->email }}</td>
-                                    <td contenteditable="true">{{ $user->phone }}</td>
-                                    <td contenteditable="true">
+                                    <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="{{ getImageUrl($user->user_img) ?? asset('assets/images/user/default_user.png') }}" alt="profile"></td>
+                                    <td >{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->phone }}</td>
+                                    <td>
                                         @if($user->email_verified_at)
-                                        <span class="badge badge-success">{{ ___('Verified') }}</span>
+                                        <span class="badge iq-bg-success">{{ ___('Verified') }}</span>
                                         @else
-                                        <span class="badge badge-secondary">{{ ___('Not Verified') }}</span>
-                                        @endif
-                                    </td>
-                                    <td contenteditable="true">
-                                        @if($user->status)
-                                        <span class="badge badge-success">{{ ___('Active') }}</span>
-                                        @else
-                                        <span class="badge badge-secondary">{{ ___('Inactive') }}</span>
+                                        <span class="badge iq-bg-warning">{{ ___('Not Verified') }}</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <span class="table-remove"><button type="button"
-                                                class="btn iq-bg-danger btn-rounded btn-sm my-0">
-                                                Remove
-                                            </button></span>
+                                        @if($user->status)
+                                        <span class="badge dark-icon-light iq-bg-primary">{{ ___('Active') }}</span>
+                                        @else
+                                        <span class="badge iq-bg-danger">{{ ___('Inactive') }}</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $user->formatted_created_at }}</td>
+                                    <td>
+                                        <div class="flex align-items-center list-user-action">
+                                            @can('delete-users')
+                                                <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline" data-toggle="tooltip" data-placement="top" title="{{ ___('Delete') }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:void(0);" onclick="this.closest('form').submit();" class="iq-bg-primary">
+                                                        <i class="ri-delete-bin-line"></i>
+                                                    </a>
+                                                </form>
+                                            @endcan
+                                            @can('edit-users')
+                                                <a class="iq-bg-primary ml-2" data-placement="top" title="" data-original-title="{{ ___('Edit') }}" href="{{ route('users.edit', $user->user_id) }}">
+                                                    <i class="ri-pencil-line"></i>
+                                                </a>
+                                            @endcan
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach

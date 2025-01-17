@@ -53,7 +53,7 @@ if (!function_exists('___')) {
 if (!function_exists('getImageUrl')) {
     function getImageUrl($image)
     {
-        return asset( 'storage/images/'.$image);
+        return $image ? asset('storage/images/' . $image) : null;
     }
 }
 

@@ -31,14 +31,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         //-------------------------- manage users routes -----------------------------
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [UserController::class, 'index'])
-            ->name('users.index')
-            ->middleware('permission:view-users');
+            ->name('users.index')->middleware('permission:view-users');
             Route::get('/create', [UserController::class, 'create'])
-            ->name('users.create')
-            ->middleware('permission:add-users');
+            ->name('users.create')->middleware('permission:add-users');
             Route::post('/store', [UserController::class, 'store'])
-            ->name('users.store')
-            ->middleware('permission:add-users');
+            ->name('users.store')->middleware('permission:add-users');
+            Route::get('/edit/{userId}', [UserController::class, 'edit'])
+            ->name('users.edit')->middleware('permission:edit-users');
+            Route::get('/{userId}', [UserController::class, 'show'])
+            ->name('users.show')->middleware('permission:view-users');
+            Route::put('/update/{user}', [UserController::class, 'update'])
+            ->name('users.update')-> middleware('permission:edit-users');
+            Route::delete('/destroy/{user}', [UserController::class, 'destroy'])
+            ->name('users.destroy')-> middleware('permission:delete-users');
         });
     });
 });

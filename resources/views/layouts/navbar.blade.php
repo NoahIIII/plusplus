@@ -8,9 +8,10 @@
     <!-- Sidebar  -->
     <div class="iq-sidebar">
         <div class="iq-sidebar-logo d-flex justify-content-between">
-            <a href="../index.html">
-                <img src="../images/logo.gif" class="img-fluid" alt="">
-                <span>Plus Plus</span>
+            <a href="{{ route('dashboard.index') }}">
+                <img src="{{ asset('assets/images/logo.png') }}" class="img-fluid" alt="">
+                <span class="logo-text">Plus Plus</span>
+                {{-- <span>Plus Plus</span> --}}
             </a>
             <div class="iq-menu-bt-sidebar">
                 <div class="iq-menu-bt align-self-center">
@@ -297,7 +298,7 @@
                                         <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                                             @csrf
                                             <button type="submit" class="btn btn-primary dark-btn-primary">
-                                                Sign out <i class="ri-login-box-line ml-2"></i>
+                                                {{ ___('Sign out') }} <i class="ri-login-box-line ml-2"></i>
                                             </button>
                                         </form>
                                     </div>
