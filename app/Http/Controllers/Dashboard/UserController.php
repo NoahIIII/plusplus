@@ -34,7 +34,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request){
         // get data from request
         $userData=$request->validated();
-
+        $userData['status'] =  $request->status ?? 0;
         // store image
         if($request->hasFile('user_img')){
             $userData['user_img']=StorageService::storeImage($request->file('user_img'), 'users','user-');
@@ -78,9 +78,7 @@ class UserController extends Controller
             $user->user_img ? StorageService::deleteImage($user->user_img) : null;
             $userData['user_img']=StorageService::storeImage($request->file('user_img'), 'users','user-');
         }
-        if($request->status == null){
-            $userData['status'] = 0;
-        }
+        $userData['status'] = $request->status ?? 0;
         $user->update($userData);
         return ApiResponseTrait::apiResponse([],__('messages.updated'),[],200);
     }

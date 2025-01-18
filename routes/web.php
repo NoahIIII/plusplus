@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Controllers\Dashboard\StaffUserAuthController;
+use App\Http\Controllers\Dashboard\StaffUserController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::group(['middleware' => 'auth:staff_users'], function () {
         Route::get('/', [MainController::class, 'index'])->name('dashboard.index');
 
-        //-------------------------- manage users routes -----------------------------
+        //-------------------------- Manage Users Routes -----------------------------
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [UserController::class, 'index'])
             ->name('users.index')->middleware('permission:view-users');
@@ -44,6 +45,24 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             ->name('users.update')-> middleware('permission:edit-users');
             Route::delete('/destroy/{user}', [UserController::class, 'destroy'])
             ->name('users.destroy')-> middleware('permission:delete-users');
+        });
+
+        //------------------------- Manage Staff Users Routes -----------------------------
+        Route::group(['prefix' => 'admins'], function () {
+            Route::get('/', [StaffUserController::class, 'index'])
+            ->name('admins.index')->middleware('permission:view-staff-users');
+            Route::get('/create', [StaffUserController::class, 'create'])
+            ->name('admins.create')->middleware('permission:add-staff-users');
+            Route::post('/store', [StaffUserController::class, 'store'])
+            ->name('admins.store')->middleware('permission:add-staff-users');
+            Route::get('/edit/{staffUserId}', [StaffUserController::class, 'edit'])
+            ->name('admins.edit')->middleware('permission:edit-staff-users');
+            Route::get('/{staffUserId}', [StaffUserController::class, 'show'])
+            ->name('admins.show')->middleware('permission:view-staff-users');
+            Route::put('/update/{staffUser}', [StaffUserController::class, 'update'])
+            ->name('admins.update')-> middleware('permission:edit-staff-users');
+            Route::delete('/destroy/{staffUser}', [StaffUserController::class, 'destroy'])
+            ->name('admins.destroy')-> middleware('permission:delete-staff-users');
         });
     });
 });

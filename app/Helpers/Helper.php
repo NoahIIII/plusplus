@@ -15,7 +15,6 @@ if (!function_exists('___')) {
     function ___($key, array $replace = [])
     {
         $trans_slug = Str::slug($key, '_');
-        // dd('lang.'.$trans_slug);
 
         if (Lang::has('lang.' . $trans_slug)) {
 

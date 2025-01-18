@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -23,6 +24,10 @@ class RolesAndPermissionsSeeder extends Seeder
             "edit-users",
             "delete-users",
             "view-users",
+            "add-staff-users",
+            "edit-staff-users",
+            "delete-staff-users",
+            "view-staff-users",
         ];
 
         foreach ($permissions as $permission) {
@@ -57,19 +62,19 @@ class RolesAndPermissionsSeeder extends Seeder
         // - Rest of Roles -----
 
 
-        $rolePermissions = [
+        // $rolePermissions = [
 
-        ];
+        // ];
 
-        // create roles
-        foreach ($rolePermissions as $role => $permission) {
-            $role = Role::create([
-                'name' => $role,
-                'guard_name' => 'staff_users'
-            ]);
+        // // create roles
+        // foreach ($rolePermissions as $role => $permission) {
+        //     $role = Role::create([
+        //         'name' => $role,
+        //         'guard_name' => 'staff_users'
+        //     ]);
 
-            // Assign permissions to roles
-            $role->givePermissionTo($permission);
-        }
+        //     // Assign permissions to roles
+        //     $role->givePermissionTo($permission);
+        // }
     }
 }

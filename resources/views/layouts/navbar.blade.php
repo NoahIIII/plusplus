@@ -25,17 +25,35 @@
         <div id="sidebar-scrollbar">
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
+                    {{-- Users --}}
                     <li class="{{ isActiveRoute('users.*') }}">
-                        <a href="#menu-design" class="iq-waves-effect collapsed" data-toggle="collapse"
+                        <a href="#users" class="iq-waves-effect collapsed" data-toggle="collapse"
                             aria-expanded="false"><i class="ri-user-line"></i><span>{{ ___('Manage Users') }}</span><i
                                 class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                        <ul id="menu-design" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        <ul id="users" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                             @can('add-users')
                             <li class="{{ isActiveRoute('users.create') }}"><a href="{{ route('users.create') }}"><i class="ri-user-add-line"></i>{{ ___('Add Users') }}</a>
                             </li>
                             @endcan
                             @can('view-users')
                             <li class="{{ isActiveRoute('users.index') }}"><a href="{{ route('users.index') }}"><i class="ri-file-list-line"></i>{{ ___('Users List') }}</a></li>
+                            @endcan
+
+                        </ul>
+                    </li>
+
+                    {{-- Staff Users --}}
+                    <li class="{{ isActiveRoute('admins.*') }}">
+                        <a href="#admins" class="iq-waves-effect collapsed" data-toggle="collapse"
+                            aria-expanded="false"><i class="ri-admin-line"></i><span>{{ ___('Manage admins') }}</span><i
+                                class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                        <ul id="admins" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                            @can('add-staff-users')
+                            <li class="{{ isActiveRoute('admins.create') }}"><a href="{{ route('admins.create') }}"><i class="ri-user-add-line"></i>{{ ___('Add admins') }}</a>
+                            </li>
+                            @endcan
+                            @can('view-staff-users')
+                            <li class="{{ isActiveRoute('admins.index') }}"><a href="{{ route('admins.index') }}"><i class="ri-file-list-line"></i>{{ ___('admins List') }}</a></li>
                             @endcan
 
                         </ul>
