@@ -68,6 +68,21 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="row justify-content-between mt-3">
+                            <!-- Page Info -->
+                            <div id="user-list-page-info" class="col-md-6">
+                                <span>Showing {{ $staffUsers->firstItem() }} to {{ $staffUsers->lastItem() }} of {{ $staffUsers->total() }} entries</span>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="col-md-6">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        {{ $staffUsers->links('pagination::bootstrap-4') }}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -25,7 +25,9 @@
         <div id="sidebar-scrollbar">
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>{{ ___('Management') }}</span></li>
                     {{-- Users --}}
+                    @can('view-users')
                     <li class="{{ isActiveRoute('users.*') }}">
                         <a href="#users" class="iq-waves-effect collapsed" data-toggle="collapse"
                             aria-expanded="false"><i class="ri-user-line"></i><span>{{ ___('Manage Users') }}</span><i
@@ -41,8 +43,10 @@
 
                         </ul>
                     </li>
+                    @endcan
 
                     {{-- Staff Users --}}
+                    @can('view-staff-users')
                     <li class="{{ isActiveRoute('admins.*') }}">
                         <a href="#admins" class="iq-waves-effect collapsed" data-toggle="collapse"
                             aria-expanded="false"><i class="ri-admin-line"></i><span>{{ ___('Manage admins') }}</span><i
@@ -58,7 +62,26 @@
 
                         </ul>
                     </li>
+                    @endcan
 
+                    {{-- brands --}}
+                    @can('view-brands')
+                    <li class="{{ isActiveRoute('brands.*') }}">
+                        <a href="#brands" class="iq-waves-effect collapsed" data-toggle="collapse"
+                            aria-expanded="false"><i class="ri-store-2-line"></i><span>{{ ___('Brands') }}</span><i
+                                class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                        <ul id="brands" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                            @can('add-brands')
+                            <li class="{{ isActiveRoute('brands.create') }}"><a href="{{ route('brands.create') }}"><i class="ri-add-box-line"></i>{{ ___('Add brands') }}</a>
+                            </li>
+                            @endcan
+                            @can('view-brands')
+                            <li class="{{ isActiveRoute('brands.index') }}"><a href="{{ route('brands.index') }}"><i class="ri-file-list-line"></i>{{ ___('brands List') }}</a></li>
+                            @endcan
+
+                        </ul>
+                    </li>
+                    @endcan
                 </ul>
             </nav>
             <div class="p-3"></div>
@@ -252,66 +275,36 @@
                     </ul>
                 </div>
                 <ul class="navbar-list">
+
                     <li>
                         <a href="#"
                             class="search-toggle iq-waves-effect d-flex align-items-center bg-primary rounded">
-                            <img src="{{ getImageUrl(auth('staff_users')->user()->staff_user_img) }}" class="img-fluid rounded mr-3" alt="user">
+                            <img src="{{ getImageUrl(auth('staff_users')->user()->staff_user_img) ?? asset('assets/images/user/default_user.png') }}" class="img-fluid rounded mr-3" alt="user">
                             <div class="caption">
                                 <h6 class="mb-0 line-height text-white">{{ auth('staff_users')->user()->name }}</h6>
-                                <span class="font-size-12 text-white">Available</span>
+                                {{-- <span class="font-size-12 text-white">Available</span> --}}
                             </div>
                         </a>
                         <div class="iq-sub-dropdown iq-user-dropdown">
                             <div class="iq-card shadow-none m-0">
                                 <div class="iq-card-body p-0 ">
                                     <div class="bg-primary p-3">
-                                        <h5 class="mb-0 text-white line-height">Hello {{ auth('staff_users')->user()->name }}</h5>
-                                        <span class="text-white font-size-12">Available</span>
+                                        <h5 class="mb-0 text-white line-height">{{ ___('Hello') }} {{ auth('staff_users')->user()->name }}</h5>
+                                        {{-- <span class="text-white font-size-12">Available</span> --}}
                                     </div>
-                                    <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
-                                        <div class="media align-items-center">
-                                            <div class="rounded iq-card-icon iq-bg-primary">
-                                                <i class="ri-file-user-line"></i>
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">My Profile</h6>
-                                                <p class="mb-0 font-size-12">View personal profile details.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
-                                        <div class="media align-items-center">
-                                            <div class="rounded iq-card-icon iq-bg-primary">
-                                                <i class="ri-profile-line"></i>
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Edit Profile</h6>
-                                                <p class="mb-0 font-size-12">Modify your personal details.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="account-setting.html" class="iq-sub-card iq-bg-primary-hover">
+
+                                    <a href="" class="iq-sub-card iq-bg-primary-hover">
                                         <div class="media align-items-center">
                                             <div class="rounded iq-card-icon iq-bg-primary">
                                                 <i class="ri-account-box-line"></i>
                                             </div>
                                             <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Account settings</h6>
-                                                <p class="mb-0 font-size-12">Manage your account parameters.</p>
+                                                <h6 class="mb-0 ">{{ ___('Account settings') }}</h6>
+                                                <p class="mb-0 font-size-12">{{ ___('Manage your account parameters.') }}</p>
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="privacy-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                                        <div class="media align-items-center">
-                                            <div class="rounded iq-card-icon iq-bg-primary">
-                                                <i class="ri-lock-line"></i>
-                                            </div>
-                                            <div class="media-body ml-3">
-                                                <h6 class="mb-0 ">Privacy Settings</h6>
-                                                <p class="mb-0 font-size-12">Control your privacy parameters.</p>
-                                            </div>
-                                        </div>
-                                    </a>
+
                                     <div class="d-inline-block w-100 text-center p-3">
                                         <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                                             @csrf

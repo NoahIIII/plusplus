@@ -1,22 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Create Admin')
+@section('title', 'Edit Admin')
 @section('content')
     {{-- @dd($permissions) --}}
     <div class="iq-card">
         <div class="iq-card-header d-flex justify-content-between">
             <div class="iq-header-title">
-                <h4 class="card-title">{{ ___('Create Admin') }}</h4>
+                <h4 class="card-title">{{ ___('Edit Admin') }}</h4>
             </div>
         </div>
         <div class="iq-card-body">
-            <form id="adminForm" data-action="{{ route('admins.store') }}" method="POST"
+            <form id="adminForm" data-action="{{ route('admins.update',$staffUser) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="form-group row align-items-center">
                     <div class="col-md-12">
                         <div class="profile-img-edit">
-                            <img class="profile-pic" src="{{ asset('assets/images/user/default_user.png') }}"
+                            <img class="profile-pic" src="{{ getImageUrl($staffUser->staff_user_img) ?? asset('assets/images/user/default_user.png') }}"
                                 alt="profile-pic">
                             <div class="p-image">
                                 <i class="ri-pencil-line upload-button"></i>
@@ -29,11 +30,13 @@
                     <div class="col">
                         <label for="name">{{ ___('Full Name') }}*</label>
                         <input name="name" type="text" class="form-control" id="name"
+                            value="{{ $staffUser->name }}"
                             placeholder="{{ ___('Full Name') }}">
                     </div>
                     <div class="col">
                         <label for="email">{{ ___('Email') }}*</label>
                         <input name="email" type="text" class="form-control" id="email"
+                            value="{{ $staffUser->email }}"
                             placeholder="{{ ___('Email') }}">
                     </div>
                 </div>
@@ -42,7 +45,8 @@
                     <div class="col">
                         <label for="password">{{ ___('Password') }}*</label>
                         <input name="password" type="text" class="form-control" id="password"
-                            placeholder="{{ ___('Password') }}">
+                            placeholder="{{ ___('Leave blank to keep the current password') }}">
+
                     </div>
                 </div>
                 <br>
@@ -64,6 +68,9 @@
                                 type="checkbox"
                                 class="custom-control-input"
                                 id="superAdminToggle"
+                                name="super_admin"
+                                value="1"
+                                @if($staffUser->hasRole('super-admin')) checked @endif
                             />
                             <label class="custom-control-label" for="superAdminToggle">
                                 {{ ___('Super Admin') }}
@@ -73,8 +80,8 @@
 
                     {{-- Chunk permissions into groups of 3 --}}
                     @foreach($permissions->chunk(3) as $chunk)
-                    <div class="col-md-3">
-                        @foreach($chunk as $permission)
+                        <div class="col-md-3">
+                            @foreach($chunk as $permission)
                                 <div class="custom-control custom-checkbox">
                                     <input
                                         type="checkbox"
@@ -82,6 +89,7 @@
                                         name="permissions[]"
                                         value="{{ $permission->id }}"
                                         id="customCheck{{ $permission->id }}"
+                                        {{ in_array($permission->id, $staffUserPermissions) ? 'checked' : '' }}
                                     />
                                     <label class="custom-control-label" for="customCheck{{ $permission->id }}">
                                         {{ ___(ucwords(str_replace('-', ' ', $permission->name))) }}
@@ -91,6 +99,7 @@
                         </div>
                     @endforeach
                 </div>
+
 
                 <br>
                 <div class="form-group">
@@ -124,8 +133,8 @@
                 processData: false,
                 success: function(response) {
                     console.log(response);
-                    window.location.href = '{{ route('admins.create') }}';
-                    toastr.success('{{ __('messages.added') }}');
+                    window.location.href = '{{ route('admins.edit', $staffUser->staff_user_id) }}';
+                    toastr.success('{{ __('messages.updated') }}');
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr.responseJSON);

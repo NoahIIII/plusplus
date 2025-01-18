@@ -4,7 +4,7 @@ namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStaffUserRequest extends FormRequest
+class StoreBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,10 @@ class StoreStaffUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-            'status' => 'nullable|boolean',
-            'permissions' => 'array',
-            'permissions.*' => 'integer|exists:permissions,id',
-            'staff_user_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'super_admin' => 'nullable|boolean',
+            'name_en'=>'required|string|min:1|max:50',
+            'name_ar'=>'required|string|min:1|max:50',
+            'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'status'=>'nullable|boolean',
         ];
     }
 }

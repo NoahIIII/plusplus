@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\StoreStaffUserRequest;
+use App\Http\Requests\Dashboard\UpdateStaffUserRequest;
 use App\Models\StaffUser;
 use App\Services\StorageService;
 use App\Traits\ApiResponseTrait;
@@ -18,7 +19,7 @@ class StaffUserController extends Controller
      */
     public function index()
     {
-        $staffUsers = StaffUser::paginate(10);
+        $staffUsers = StaffUser::paginate(20);
         return view('admins.index', compact('staffUsers'));
     }
 
@@ -47,7 +48,7 @@ class StaffUserController extends Controller
             : null;
         $staffUserData['staff_user_img'] = $staffUserImg;
         // unset the permissions array
-        unset($staffUserData['permissions']);
+        unset($staffUserData['permissions'], $staffUserData['super_admin']);
         // store the staff user
         $staffUser = StaffUser::create($staffUserData);
         // Sync the permissions with the staff user
@@ -55,7 +56,62 @@ class StaffUserController extends Controller
             $permissions = Permission::whereIn('id', $request->permissions)->pluck('name');
             $staffUser->syncPermissions($permissions);
         }
+        // sync the roles
+        if ($request->super_admin) {
+            $staffUser->assignRole('super-admin');
+        }
         return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
+    }
+
+    /**
+     * view the edit form
+     * @param mixed $staffUserId
+     */
+    public function edit($staffUserId)
+    {
+        $staffUser = StaffUser::findOrFail($staffUserId);
+        $staffUserPermissions = $staffUser->permissions()->pluck('id')->toArray();
+        $permissions = Permission::select('name', 'id')->get();
+        return view('admins.edit', get_defined_vars());
+    }
+
+    /**
+     * update staff user
+     * @param UpdateStaffUserRequest $request
+     * @param StaffUser $staffUser
+     */
+    public function update(UpdateStaffUserRequest $request, StaffUser $staffUser)
+    {
+        // get data from request
+        $staffUserData = $request->validated();
+        $staffUserData['status'] = $request->status ?? 0;
+        if ($request->filled('password')) {
+            $staffUserData['password'] = Hash::make($request->password);
+        } else {
+            unset($staffUserData['password']);
+        }
+        // handle the uploaded image
+        $staffUserImg = $request->hasFile('staff_user_img')
+            ? StorageService::storeImage($request->file('staff_user_img'), 'admins', 'staff_user-')
+            : null;
+        $staffUserData['staff_user_img'] = $staffUserImg;
+        // delete old image
+        if ($staffUser->staff_user_img) StorageService::deleteImage($staffUser->staff_user_img);
+        // unset the permissions array
+        unset($staffUserData['permissions'], $staffUserData['super_admin']);
+        // update the staff user
+        $staffUser->update($staffUserData);
+        // Sync the permissions with the staff user
+        $permissionIds = $request->permissions ?? [];
+        $permissions = Permission::whereIn('id', $permissionIds)->pluck('name');
+        $staffUser->syncPermissions($permissions);
+        // sync the roles
+        if ($request->super_admin) {
+            $staffUser->assignRole('super-admin');
+        } else {
+            $staffUser->removeRole('super-admin');
+        }
+        return ApiResponseTrait::apiResponse([], __('messages.updated'), [], 200);
     }
 
     /**
@@ -66,6 +122,6 @@ class StaffUserController extends Controller
         // delete the user image
         $staffUser->user_img ? StorageService::deleteImage($staffUser->staff_user_img) : null;
         $staffUser->delete();
-        return back()->with('Success',__('messages.deleted'));
+        return back()->with('Success', __('messages.deleted'));
     }
 }

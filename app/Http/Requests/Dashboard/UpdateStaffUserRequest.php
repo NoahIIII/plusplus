@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Dashboard;
 
+use App\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStaffUserRequest extends FormRequest
+class UpdateStaffUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +25,16 @@ class StoreStaffUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'password' => 'required|string|min:6',
+            'password' => 'nullable|string|min:6',
+            'staff_user_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'nullable|boolean',
             'permissions' => 'array',
             'permissions.*' => 'integer|exists:permissions,id',
-            'staff_user_img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'super_admin' => 'nullable|boolean',
         ];
+    }
+    public function failedValidation($validator)
+    {
+        return ApiResponseTrait::failedValidation($validator, [], null, 422);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Controllers\Dashboard\StaffUserAuthController;
 use App\Http\Controllers\Dashboard\StaffUserController;
@@ -63,6 +64,24 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             ->name('admins.update')-> middleware('permission:edit-staff-users');
             Route::delete('/destroy/{staffUser}', [StaffUserController::class, 'destroy'])
             ->name('admins.destroy')-> middleware('permission:delete-staff-users');
+        });
+
+        //--------------------------------- Manage Brands Routes -----------------------------
+        Route::group(['prefix' => 'brands'], function () {
+            Route::get('/', [BrandController::class, 'index'])
+            ->name('brands.index')->middleware('permission:view-brands');
+            Route::get('/create', [BrandController::class, 'create'])
+            ->name('brands.create')->middleware('permission:add-brands');
+            Route::post('/store', [BrandController::class, 'store'])
+            ->name('brands.store')->middleware('permission:add-brands');
+            Route::get('/edit/{brandId}', [BrandController::class, 'edit'])
+            ->name('brands.edit')->middleware('permission:edit-brands');
+            Route::get('/{brandId}', [BrandController::class, 'show'])
+            ->name('brands.show')->middleware('permission:view-brands');
+            Route::put('/update/{brand}', [BrandController::class, 'update'])
+            ->name('brands.update')-> middleware('permission:edit-brands');
+            Route::delete('/destroy/{brand}', [BrandController::class, 'destroy'])
+            ->name('brands.destroy')-> middleware('permission:delete-brands');
         });
     });
 });
