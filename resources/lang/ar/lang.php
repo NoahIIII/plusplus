@@ -94,9 +94,10 @@ return array (
   'of' => 'من',
   'to' => 'الى',
   'search_by_name_phone_or_email' => 'Search by name, phone or email...',
-  'all_status' => 'All Status',
-  'add_categories' => 'Add Categories',
-  'delete_categories' => 'Delete Categories',
-  'edit_categories' => 'Edit Categories',
-  'view_categories' => 'View Categories',
+  'all_status' => 'جميع الحالات',
+'add_categories' => 'إضافة فئات',
+'delete_categories' => 'حذف الفئات',
+'edit_categories' => 'تعديل الفئات',
+'view_categories' => 'عرض الفئات',
+
 );
