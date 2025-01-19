@@ -1,28 +1,26 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# E-commerce Platform for Multiple Business Types
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is an e-commerce platform designed to manage various business types, including pharmacies, supermarkets, and laundromats. It provides functionality to handle business-specific products, categories, subcategories, brands, payment integrations, a points system, wallet functionality, and discount offers. The platform also supports dynamic product variant management, such as different sizes or colors for each product.
 
-## Project Description
-This project is an e-commerce platform designed to manage various business types, including pharmacies, supermarkets, and laundromats. It provides functionality to handle business-specific products, categories, and subcategories, along with brand management.
+## Features
 
-The platform features dynamic route handling, allowing each business type to have its own set of brands displayed under a unique URL, making it easier to manage and navigate the system. Users can also manage business types, categories, and brands through a user-friendly admin interface.
+- **Multiple Business Types:** Manage pharmacies, supermarkets, and laundromats, each with its own dedicated pages for relevant products, categories, and brands.
+- **Dynamic Brand Management:** Assign brands to specific business types, each with its own brand & category & product & offer list.
+- **Category & Subcategory Management:** Custom categories and subcategories for each business type, enabling better product organization.
+- **Product Management:** 
+  - Add, edit, and manage products within each business type.
+  - Attach product variants, such as different sizes, colors, or other attributes.
+  - Set product prices and manage stock levels for each variant.
+- **Payment Integration:** 
+  - Integration with payment gateways like for handling payments securely.
+  - Allow customers to make payments for orders, with support for various payment methods.
+- **Admin Interface:** A user-friendly admin panel for managing business data, products, brands, categories, subcategories, and more.
+- **Product Variant Support:** Manage different versions of the same product with customizable attributes, such as size, color, or quantity.
+- **Points System:** A reward-based points system where users can earn points for various actions (e.g., purchases, reviews) and redeem them for discounts or products.
+- **Wallet System:** A virtual wallet where users can add funds, use them to make purchases, and track their balance and transactions.
+- **Discount Offers:** Create and manage discount offers for products or categories, providing customers with promotional discounts during checkout.
 
-Currently, the project is a work in progress, and several features are still being developed. The overall architecture is designed to be scalable, modular, and flexible, catering to the evolving needs of different business types.
+## Current Status
 
-Features
-Multiple business types (Pharmacy, Supermarket, Laundromat)
-Dynamic management of categories, subcategories, and products for each business type
-Brand management with the ability to assign brands to specific business types
-Route handling for each business type and its related pages
-Admin interface for easy management of business data
-Current Status
-The project is still under development and some features are not yet fully implemented.
-Ongoing improvements to the user interface and route handling.
-Feel free to explore the repository, and contributions are welcome!
-
+- **Under Development:** The project is still in progress, with several features yet to be fully implemented.
 
