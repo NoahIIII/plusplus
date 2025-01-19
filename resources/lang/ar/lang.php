@@ -88,7 +88,9 @@ return array (
   'parent_category' => 'الفئة الأم',
   'no_parent_main_category' => 'بدون فئة أم (الفئة الرئيسية)',
   'select_parent_category' => 'اختيار الفئة الأم',
-  'categories' => 'categories',
-  'categories_list' => 'categories List',
-  'add_category' => 'Add Category',
+  'categories' => 'الفئات',
+'categories_list' => 'قائمة الفئات',
+'add_category' => 'إضافة فئة',
+  'of' => 'من',
+  'to' => 'الى',
 );

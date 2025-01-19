@@ -92,4 +92,6 @@ return array (
   'categories' => 'categories',
   'categories_list' => 'categories List',
   'add_category' => 'Add Category',
+  'of' => 'of',
+  'to' => 'to',
 );

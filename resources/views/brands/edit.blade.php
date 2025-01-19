@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-@section('title', 'Edit Brand')
+@section('title', ___('Edit Brand'))
 @section('content')
     <div class="iq-card">
         <div class="iq-card-header d-flex justify-content-between">

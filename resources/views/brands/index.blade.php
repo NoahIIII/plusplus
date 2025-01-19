@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Brands')
+@section('title',  ___('Brands') )
 @section('content')
 <div class="row">
     <div class="col-sm-12">
@@ -63,7 +63,7 @@
                         <div class="row justify-content-between mt-3">
                             <!-- Page Info -->
                             <div id="user-list-page-info" class="col-md-6">
-                                <span>{{ ___('Showing') }} {{ $brands->firstItem() }} to {{ $brands->lastItem() }} of {{ $brands->total() }} {{ ___('entries') }}</span>
+                                <span>{{ ___('Showing') }} {{ $brands->firstItem() }} {{ ___('to') }} {{ $brands->lastItem() }} {{ ___('of') }} {{ $brands->total() }} {{ ___('entries') }}</span>
                             </div>
 
                             <!-- Pagination -->

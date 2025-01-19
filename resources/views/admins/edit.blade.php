@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Admin')
+@section('title', ___('Edit Admin'))
 @section('content')
     {{-- @dd($permissions) --}}
     <div class="iq-card">
