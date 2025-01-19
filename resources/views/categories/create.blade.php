@@ -48,7 +48,7 @@
                 <div class="row">
                     <div class="col">
                         <label for="level">{{ ___('Category Level') }}</label>
-                        <select id="level" class="form-control">
+                        <select name="level" id="level" class="form-control">
                             <option value="1">{{ ___('Main Category') }}</option>
                             <option value="2">{{ ___('Subcategory') }}</option>
                             <option value="3">{{ ___('Sub-Subcategory') }}</option>

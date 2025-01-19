@@ -8,6 +8,8 @@ use App\Http\Requests\Dashboard\Users\UpdateUserRequest;
 use App\Models\User;
 use App\Services\StorageService;
 use App\Traits\ApiResponseTrait;
+use App\Pipelines\Filters\UserFilter;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -17,7 +19,13 @@ class UserController extends Controller
      *
      */
     public function index(){
-        $users = User::paginate(20);
+        $users = app(Pipeline::class)
+        ->send(User::query())
+        ->through([
+            UserFilter::class,
+        ])
+        ->thenReturn()
+        ->paginate(20);
         return view('users.index',compact('users'));
     }
     /**

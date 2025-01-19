@@ -53,10 +53,11 @@ class CategoryService
     public function validateCategory($request)
     {
         $level = $request->input('level');
+        // dd($level);
 
         // Determine which validation request to use based on the category level
         switch ($level) {
-            case null:
+            case 1:
                 return $request->validate((new StoreCategoryRequest)->rules());
 
             case 2:

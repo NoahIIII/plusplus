@@ -28,9 +28,8 @@ class StoreSubSubCategoryRequest extends FormRequest
             'status' => 'nullable|boolean',
             'parent_id' => [
                 'required',
-                'exists:categories,category_id',
-                Rule::exists('categories')->where(function ($query) {
-                    $query->where('level', 2); // Ensure that the parent category has level 2
+                Rule::exists('categories', 'category_id')->where(function ($query) {
+                    $query->where('level', 2); // Ensure that the category has level 1
                 }),
             ],
         ];

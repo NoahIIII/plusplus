@@ -16,8 +16,46 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    public function __construct(private CategoryService $categoryService) {}
+    public function __construct(private CategoryService $categoryService) {
 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     */
+    public function index()
+    {
+        $categories = Category::all();
+        return view('categories.index', compact('categories'));
+    }
+
+    /**
+     * return the create category form
+     */
+    public function create()
+    {
+        $businesses = BusinessType::all();
+        return view('categories.create', compact('businesses'));
+    }
+
+    /**
+     * Store Main Category
+     * @param Request $request
+     */
+    public function store(Request $request)
+
+    {
+        // dd($request->all());
+        // handle the validation (different validation for each category level)
+        $categoryData = $this->categoryService->validateCategory($request);
+        if ($categoryData instanceof \Illuminate\Http\JsonResponse) {
+            return $categoryData;
+        }
+        // store the category
+        $this->categoryService->store($categoryData);
+        return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
+    }
     /**
      * Get categories based on the level.
      *
@@ -36,31 +74,5 @@ class CategoryController extends Controller
         } catch (ValidationException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
-    }
-
-    /**
-     * return the create category form
-     */
-    public function create()
-    {
-        $businesses = BusinessType::all();
-        return view('categories.create', compact('businesses'));
-    }
-
-    /**
-     * Store Main Category
-     * @param StoreCategoryRequest $request
-     */
-    public function store(StoreCategoryRequest $request)
-
-    {
-        // handle the validation (different validation for each category level)
-        $categoryData = $this->categoryService->validateCategory($request);
-        if ($categoryData instanceof \Illuminate\Http\JsonResponse) {
-            return $categoryData;
-        }
-        // store the category
-        $this->categoryService->store($categoryData);
-        return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
     }
 }

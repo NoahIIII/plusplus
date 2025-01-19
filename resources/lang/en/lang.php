@@ -94,4 +94,10 @@ return array (
   'add_category' => 'Add Category',
   'of' => 'of',
   'to' => 'to',
+  'search_by_name_phone_or_email' => 'Search by name, phone or email...',
+  'all_status' => 'All Status',
+  'add_categories' => 'Add Categories',
+  'delete_categories' => 'Delete Categories',
+  'edit_categories' => 'Edit Categories',
+  'view_categories' => 'View Categories',
 );

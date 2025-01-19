@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\StaffUsers\StoreStaffUserRequest;
 use App\Http\Requests\Dashboard\StaffUsers\UpdateStaffUserRequest;
 use App\Models\StaffUser;
+use App\Pipelines\Filters\AdminFilter;
 use App\Services\StorageService;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Pipeline\Pipeline;
+
 
 class StaffUserController extends Controller
 {
@@ -19,7 +22,13 @@ class StaffUserController extends Controller
      */
     public function index()
     {
-        $staffUsers = StaffUser::paginate(20);
+        $staffUsers = app(Pipeline::class)
+        ->send(StaffUser::query())
+        ->through([
+            AdminFilter::class,
+        ])
+        ->thenReturn()
+        ->paginate(20);
         return view('admins.index', compact('staffUsers'));
     }
 
