@@ -113,6 +113,44 @@
                     @endcan
 
                     {{-- Categories --}}
+                    @can('view-categories')
+                        <li class="{{ isActiveRoute('categories.*') }}">
+                            <a href="#categories" class="iq-waves-effect collapsed" data-toggle="collapse"
+                                aria-expanded="false">
+                                <i class="ri-list-check"></i><span>{{ ___('categories') }}</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i>
+                            </a>
+                            <ul id="categories" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                @can('add-categories')
+                                    <li class="{{ isActiveRoute('categories.create') }}">
+                                        <a href="{{ route('categories.create') }}">
+                                            <i class="ri-add-box-line"></i>{{ ___('Add Category') }}
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @foreach (App\Models\BusinessType::all() as $businessType)
+                                    <ul>
+                                        <li>
+                                            <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
+                                                aria-expanded="false"><i
+                                                class="ri-menu-line"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
+                                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                                            <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
+                                                <li
+                                                    class="{{ isActiveRoute('categories.index', 'active', $businessType->slug) }}">
+                                                    <a href="{{ route('categories.index', $businessType->slug) }}">
+                                                        <i class="ri-file-list-line"></i>
+                                                        {{ ___('categories List') }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endcan
                 </ul>
             </nav>
             <div class="p-3"></div>

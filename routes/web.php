@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Controllers\Dashboard\StaffUserAuthController;
 use App\Http\Controllers\Dashboard\StaffUserController;
@@ -82,6 +83,25 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
             ->name('brands.update')-> middleware('permission:edit-brands');
             Route::delete('/destroy/{brand}', [BrandController::class, 'destroy'])
             ->name('brands.destroy')-> middleware('permission:delete-brands');
+        });
+
+        //--------------------------------- Manage Categories Routes -----------------------------
+        Route::group(['prefix' => 'categories'], function () {
+            Route::get('/type/{slug}', [CategoryController::class, 'index'])
+            ->name('categories.index')->middleware('permission:view-categories');
+            Route::get('/create', [CategoryController::class, 'create'])
+            ->name('categories.create')->middleware('permission:add-categories');
+            Route::post('/store', [CategoryController::class, 'store'])
+            ->name('categories.store')->middleware('permission:add-categories');
+            Route::get('/edit/{categoryId}', [CategoryController::class, 'edit'])
+            ->name('categories.edit')->middleware('permission:edit-categories');
+            // Route::get('/{categoryId}', [CategoryController::class, 'show'])
+            // ->name('categories.show')->middleware('permission:view-categories');
+            Route::put('/update/{category}', [CategoryController::class, 'update'])
+            ->name('categories.update')-> middleware('permission:edit-categories');
+            Route::delete('/destroy/{category}', [CategoryController::class, 'destroy'])
+            ->name('categories.destroy')-> middleware('permission:delete-categories');
+            Route::get('/get/by-level', [CategoryController::class, 'getCategoriesByLevel']);
         });
     });
 });
