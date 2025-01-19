@@ -32,6 +32,10 @@ class RolesAndPermissionsSeeder extends Seeder
             "edit-brands",
             "delete-brands",
             "view-brands",
+            "add-categories",
+            "edit-categories",
+            "delete-categories",
+            "view-categories",
         ];
 
         foreach ($permissions as $permission) {
