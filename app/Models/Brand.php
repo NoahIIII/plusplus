@@ -20,6 +20,7 @@ class Brand extends Model
         'name',
         'image',
         'status',
+        'business_type_id'
     ];
 
     protected $casts = [

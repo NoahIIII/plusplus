@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Dashboard;
+namespace App\Http\Requests\Dashboard\Users;
 
 use App\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Http\FormRequest;

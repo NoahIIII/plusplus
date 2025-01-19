@@ -75,15 +75,22 @@ if (!function_exists('storeImage')) {
      * @return string
      */
 if (!function_exists('isActiveRoute')) {
-    function isActiveRoute($routes, $class = 'active')
+    function isActiveRoute($routes, $class = 'active',$slug=null)
     {
         $routes = (array) $routes; // Ensure $routes is an array
         foreach ($routes as $route) {
+            // Check if the route name matches and if the slug matches (if passed)
             if (request()->routeIs($route)) {
+                // Check if the slug is provided and matches the current route slug
+                if ($slug && request()->route('slug') != $slug) {
+                    return ''; // Return the class if both match
+                }
+                // If no slug is provided, just check if the route matches
                 return $class;
             }
         }
         return '';
+
     }
 }
 

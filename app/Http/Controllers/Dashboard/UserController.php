@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\StoreUserRequest;
-use App\Http\Requests\Dashboard\UpdateUserRequest;
+use App\Http\Requests\Dashboard\Users\StoreUserRequest;
+use App\Http\Requests\Dashboard\Users\UpdateUserRequest;
 use App\Models\User;
 use App\Services\StorageService;
 use App\Traits\ApiResponseTrait;
@@ -15,7 +15,6 @@ class UserController extends Controller
     /**
      * get all the users
      *
-     * @return void
      */
     public function index(){
         $users = User::paginate(20);

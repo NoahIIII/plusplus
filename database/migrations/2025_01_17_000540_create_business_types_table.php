@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('brands', function (Blueprint $table) {
-            $table->id('brand_id');
+        Schema::create('business_types', function (Blueprint $table) {
+            $table->id();
             $table->json('name');
-            $table->string('image');
-            $table->boolean('status')->default(1);
-            $table->foreignId('business_type_id')->nullable()
-            ->constrained('business_types','id')
-            ->onDelete('set null');
+            $table->string('slug');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('brands');
+        Schema::dropIfExists('business_types');
     }
 };

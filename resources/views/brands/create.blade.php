@@ -27,6 +27,20 @@
                 <br>
                 <div class="row">
                     <div class="col">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">{{ ___('Business Type') }}</label>
+                            <select name="business_type_id" class="form-control" id="exampleFormControlSelect1">
+                                <option selected="" disabled="">{{ ___('Select Your Brand Business Type') }}</option>
+                                @foreach ($businesses as $business )
+                                    <option value="{{ $business->id }}">{{ $business->getTranslation('name', app()->getLocale()) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
                         <div class="custom-control custom-switch custom-control-inline">
                             <input name="status" value="1" type="checkbox" class="custom-control-input"
                                 id="customSwitch2" checked="">
@@ -43,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+
                 <br>
                 <div class="form-group">
                     <button form="brandForm" type="submit" class="btn btn-primary">

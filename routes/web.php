@@ -68,7 +68,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //--------------------------------- Manage Brands Routes -----------------------------
         Route::group(['prefix' => 'brands'], function () {
-            Route::get('/', [BrandController::class, 'index'])
+            Route::get('/type/{slug}', [BrandController::class, 'index'])
             ->name('brands.index')->middleware('permission:view-brands');
             Route::get('/create', [BrandController::class, 'create'])
             ->name('brands.create')->middleware('permission:add-brands');

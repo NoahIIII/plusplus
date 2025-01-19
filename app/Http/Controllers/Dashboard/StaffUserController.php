@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\StoreStaffUserRequest;
-use App\Http\Requests\Dashboard\UpdateStaffUserRequest;
+use App\Http\Requests\Dashboard\StaffUsers\StoreStaffUserRequest;
+use App\Http\Requests\Dashboard\StaffUsers\UpdateStaffUserRequest;
 use App\Models\StaffUser;
 use App\Services\StorageService;
 use App\Traits\ApiResponseTrait;

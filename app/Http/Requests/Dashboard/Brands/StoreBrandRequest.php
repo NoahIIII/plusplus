@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Dashboard;
+namespace App\Http\Requests\Dashboard\Brands;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,6 +26,7 @@ class StoreBrandRequest extends FormRequest
             'name_ar'=>'required|string|min:1|max:50',
             'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'status'=>'nullable|boolean',
+            'business_type_id'=>'required|exists:business_types,id'
         ];
     }
 }
