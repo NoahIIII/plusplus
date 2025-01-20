@@ -32,75 +32,75 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         Route::get('/', [MainController::class, 'index'])->name('dashboard.index');
 
         //-------------------------- Manage Users Routes -----------------------------
-        Route::group(['prefix' => 'users'], function () {
+        Route::group(['prefix' => 'users', 'middleware' => 'permission:manage-users'], function () {
             Route::get('/', [UserController::class, 'index'])
-            ->name('users.index')->middleware('permission:view-users');
+                ->name('users.index');
             Route::get('/create', [UserController::class, 'create'])
-            ->name('users.create')->middleware('permission:add-users');
+                ->name('users.create');
             Route::post('/store', [UserController::class, 'store'])
-            ->name('users.store')->middleware('permission:add-users');
+                ->name('users.store');
             Route::get('/edit/{userId}', [UserController::class, 'edit'])
-            ->name('users.edit')->middleware('permission:edit-users');
+                ->name('users.edit');
             Route::get('/{userId}', [UserController::class, 'show'])
-            ->name('users.show')->middleware('permission:view-users');
+                ->name('users.show');
             Route::put('/update/{user}', [UserController::class, 'update'])
-            ->name('users.update')-> middleware('permission:edit-users');
+                ->name('users.update');
             Route::delete('/destroy/{user}', [UserController::class, 'destroy'])
-            ->name('users.destroy')-> middleware('permission:delete-users');
+                ->name('users.destroy');
         });
 
         //------------------------- Manage Staff Users Routes -----------------------------
-        Route::group(['prefix' => 'admins'], function () {
+        Route::group(['prefix' => 'admins', 'middleware' => 'permission:manage-staff-users'], function () {
             Route::get('/', [StaffUserController::class, 'index'])
-            ->name('admins.index')->middleware('permission:view-staff-users');
+                ->name('admins.index');
             Route::get('/create', [StaffUserController::class, 'create'])
-            ->name('admins.create')->middleware('permission:add-staff-users');
+                ->name('admins.create');
             Route::post('/store', [StaffUserController::class, 'store'])
-            ->name('admins.store')->middleware('permission:add-staff-users');
+                ->name('admins.store');
             Route::get('/edit/{staffUserId}', [StaffUserController::class, 'edit'])
-            ->name('admins.edit')->middleware('permission:edit-staff-users');
+                ->name('admins.edit');
             Route::get('/{staffUserId}', [StaffUserController::class, 'show'])
-            ->name('admins.show')->middleware('permission:view-staff-users');
+                ->name('admins.show');
             Route::put('/update/{staffUser}', [StaffUserController::class, 'update'])
-            ->name('admins.update')-> middleware('permission:edit-staff-users');
+                ->name('admins.update');
             Route::delete('/destroy/{staffUser}', [StaffUserController::class, 'destroy'])
-            ->name('admins.destroy')-> middleware('permission:delete-staff-users');
+                ->name('admins.destroy');
         });
 
         //--------------------------------- Manage Brands Routes -----------------------------
-        Route::group(['prefix' => 'brands'], function () {
+        Route::group(['prefix' => 'brands', 'middleware' => 'permission:manage-brands'], function () {
             Route::get('/type/{slug}', [BrandController::class, 'index'])
-            ->name('brands.index')->middleware('permission:view-brands');
+                ->name('brands.index');
             Route::get('/create', [BrandController::class, 'create'])
-            ->name('brands.create')->middleware('permission:add-brands');
+                ->name('brands.create');
             Route::post('/store', [BrandController::class, 'store'])
-            ->name('brands.store')->middleware('permission:add-brands');
+                ->name('brands.store');
             Route::get('/edit/{brandId}', [BrandController::class, 'edit'])
-            ->name('brands.edit')->middleware('permission:edit-brands');
+                ->name('brands.edit');
             Route::get('/{brandId}', [BrandController::class, 'show'])
-            ->name('brands.show')->middleware('permission:view-brands');
+                ->name('brands.show');
             Route::put('/update/{brand}', [BrandController::class, 'update'])
-            ->name('brands.update')-> middleware('permission:edit-brands');
+                ->name('brands.update');
             Route::delete('/destroy/{brand}', [BrandController::class, 'destroy'])
-            ->name('brands.destroy')-> middleware('permission:delete-brands');
+                ->name('brands.destroy');
         });
 
         //--------------------------------- Manage Categories Routes -----------------------------
-        Route::group(['prefix' => 'categories'], function () {
+        Route::group(['prefix' => 'categories', 'middleware' => 'permission:manage-categories'], function () {
             Route::get('/type/{slug}', [CategoryController::class, 'index'])
-            ->name('categories.index')->middleware('permission:view-categories');
+                ->name('categories.index');
             Route::get('/create', [CategoryController::class, 'create'])
-            ->name('categories.create')->middleware('permission:add-categories');
+                ->name('categories.create');
             Route::post('/store', [CategoryController::class, 'store'])
-            ->name('categories.store')->middleware('permission:add-categories');
+                ->name('categories.store');
             Route::get('/edit/{categoryId}', [CategoryController::class, 'edit'])
-            ->name('categories.edit')->middleware('permission:edit-categories');
+                ->name('categories.edit');
             // Route::get('/{categoryId}', [CategoryController::class, 'show'])
             // ->name('categories.show')->middleware('permission:view-categories');
             Route::put('/update/{category}', [CategoryController::class, 'update'])
-            ->name('categories.update')-> middleware('permission:edit-categories');
+                ->name('categories.update');
             Route::delete('/destroy/{category}', [CategoryController::class, 'destroy'])
-            ->name('categories.destroy')-> middleware('permission:delete-categories');
+                ->name('categories.destroy');
             Route::get('/get/by-level', [CategoryController::class, 'getCategoriesByLevel']);
         });
     });

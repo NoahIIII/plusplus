@@ -67,19 +67,11 @@
                                         <td>{{ $staffUser->formatted_created_at }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">
-                                                @can('delete-staff-users')
-                                                    <form action="{{ route('admins.destroy', $staffUser) }}" method="POST"
-                                                        class="d-inline" data-toggle="tooltip" data-placement="top"
-                                                        title="{{ ___('Delete') }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <a href="javascript:void(0);" onclick="this.closest('form').submit();"
-                                                            class="iq-bg-primary">
-                                                            <i class="ri-delete-bin-line"></i>
-                                                        </a>
-                                                    </form>
+                                                @can('manage-staff-users')
+                                                <x-delete-button :route="route('admins.destroy', $staffUser)" title="{{ ___('Delete') }}" />
+
                                                 @endcan
-                                                @can('edit-staff-users')
+                                                @can('manage-staff-users')
                                                     <a class="iq-bg-primary ml-2" data-placement="top" title=""
                                                         data-original-title="{{ ___('Edit') }}"
                                                         href="{{ route('admins.edit', $staffUser->staff_user_id) }}">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
@@ -34,5 +35,27 @@ class Category extends Model
     public function subSubcategories()
     {
         return $this->hasMany(Category::class, 'parent_id')->where('level', 3); // Get sub-subcategories (Level 3)
+    }
+
+    // children relation
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function pharmacyProducts()
+    {
+        return $this->morphedByMany(PharmacyProduct::class, 'categoryable');
+    }
+
+    public function getFormattedCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d H:i');
+    }
+
+    // You can create a similar accessor for any other date attribute
+    public function getFormattedUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d H:i');
     }
 }

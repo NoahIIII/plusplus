@@ -100,4 +100,12 @@ return array (
   'delete_categories' => 'Delete Categories',
   'edit_categories' => 'Edit Categories',
   'view_categories' => 'View Categories',
+  'main_categories' => 'Main Categories',
+  'are_you_sure' => 'Are you sure?',
+  'you_will_not_be_able_to_recover_this_data' => 'You will not be able to recover this data!',
+  'yes_delete_it' => 'Yes delete it!',
+  'no_cancel' => 'No, cancel!',
+  'manage_categories' => 'Manage Categories',
+  'manage_products' => 'Manage Products',
+  'manage_staff_users' => 'Manage Staff Users',
 );

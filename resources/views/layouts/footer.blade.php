@@ -57,6 +57,7 @@
 <script src="{{ asset('assets/js/smooth-scrollbar.js') }}"></script>
 <!-- Lottie JavaScript -->
 <script src="{{ asset('assets/js/lottie.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Chart Custom JavaScript -->
 <script src="{{ asset('assets/js/chart-custom.js') }}"></script>
 <!-- Custom JavaScript -->

@@ -40,16 +40,10 @@
                                     <td>{{ $brand->formatted_created_at }}</td>
                                     <td>
                                         <div class="flex align-items-center list-user-action">
-                                            @can('delete-brands')
-                                                <form action="{{ route('brands.destroy', $brand) }}" method="POST" class="d-inline" data-toggle="tooltip" data-placement="top" title="{{ ___('Delete') }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="javascript:void(0);" onclick="this.closest('form').submit();" class="iq-bg-primary">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                    </a>
-                                                </form>
+                                            @can('manage-brands')
+                                            <x-delete-button :route="route('brands.destroy', $brand)" title="Delete" />
                                             @endcan
-                                            @can('edit-brands')
+                                            @can('manage-brands')
                                                 <a class="iq-bg-primary ml-2" data-placement="top" title="" data-original-title="{{ ___('Edit') }}" href="{{ route('brands.edit', $brand->brand_id) }}">
                                                     <i class="ri-pencil-line"></i>
                                                 </a>

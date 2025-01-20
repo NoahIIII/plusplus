@@ -20,22 +20,11 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         //-----------------------  Make Permissions -----------------------
         $permissions = [
-            "add-users",
-            "edit-users",
-            "delete-users",
-            "view-users",
-            "add-staff-users",
-            "edit-staff-users",
-            "delete-staff-users",
-            "view-staff-users",
-            "add-brands",
-            "edit-brands",
-            "delete-brands",
-            "view-brands",
-            "add-categories",
-            "edit-categories",
-            "delete-categories",
-            "view-categories",
+            "manage-users",
+            "manage-staff-users",
+            "manage-brands",
+            "manage-categories",
+            "manage-products",
         ];
 
         foreach ($permissions as $permission) {

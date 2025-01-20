@@ -5,8 +5,10 @@ namespace App\Services;
 use App\Http\Requests\Dashboard\Categories\StoreCategoryRequest;
 use App\Http\Requests\Dashboard\Categories\StoreSubCategoryRequest;
 use App\Http\Requests\Dashboard\Categories\StoreSubSubCategoryRequest;
+use App\Models\BusinessType;
 use App\Models\Category;
 use Dotenv\Exception\ValidationException;
+use Illuminate\Http\Request;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class CategoryService
@@ -67,8 +69,34 @@ class CategoryService
                 return $request->validate((new StoreSubSubCategoryRequest)->rules());
 
             default:
-                return response()->json(['error' => 'Invalid category level','level'=>$request->all()], 400);
+                return response()->json(['error' => 'Invalid category level', 'level' => $request->all()], 400);
         }
+    }
+
+    /**
+     * get categories
+     * @param Request $request
+     * @param mixed $slug
+     */
+    public function getCategories($request, $slug)
+    {
+        // get the business type id
+        $businessType = BusinessType::where('slug', $slug)
+            ->select('id')
+            ->first();
+        $businessType ?? abort(404);
+        $parentId = $request->input('parent_id') ?? null;
+        $level = 1;
+        if ($parentId) {
+            $parentCategory = Category::find($parentId);
+            $parentCategory ?? abort(404);
+            $level = $parentCategory->level + 1;
+            if ($level > 3) abort(404);
+        }
+        return Category::where('business_type_id', $businessType->id)
+            ->where('parent_id', $parentId)
+            ->where('level', $level)
+            ->paginate(20);
     }
 
     /**

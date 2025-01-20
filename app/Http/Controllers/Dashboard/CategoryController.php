@@ -16,17 +16,16 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    public function __construct(private CategoryService $categoryService) {
-
-    }
+    public function __construct(private CategoryService $categoryService) {}
 
     /**
      * Display a listing of the resource.
-     *
+     * @param string $slug
+     * @param Request $request
      */
-    public function index()
+    public function index(Request $request, $slug)
     {
-        $categories = Category::all();
+        $categories = $this->categoryService->getCategories($request, $slug);
         return view('categories.index', compact('categories'));
     }
 
@@ -46,7 +45,6 @@ class CategoryController extends Controller
     public function store(Request $request)
 
     {
-        // dd($request->all());
         // handle the validation (different validation for each category level)
         $categoryData = $this->categoryService->validateCategory($request);
         if ($categoryData instanceof \Illuminate\Http\JsonResponse) {
@@ -55,6 +53,34 @@ class CategoryController extends Controller
         // store the category
         $this->categoryService->store($categoryData);
         return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
+    }
+
+    /**
+     * display the edit category form
+     * @param integer $categoryId
+     */
+    public function edit(int $categoryId)
+    {
+        $category = Category::findOrFail($categoryId);
+        return view('categories.edit', compact('category'));
+    }
+
+    /**
+     * delete category
+     *
+     * @param Category $category
+     */
+
+    public function destroy(Category $category)
+    {
+        $childCategories = Category::where('parent_id', $category->category_id)->get();
+        if (count($childCategories) > 0) {
+            $childCategories->each(function ($childCategory) {
+                $childCategory->delete();
+            });
+        }
+        $category->delete();
+        return back()->with("Success", __('messages.deleted'));
     }
     /**
      * Get categories based on the level.

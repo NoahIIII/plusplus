@@ -28,18 +28,18 @@
                     <li class="iq-menu-title"><i
                             class="ri-subtract-line"></i><span>{{ ___('General Management') }}</span></li>
                     {{-- Users --}}
-                    @can('view-users')
+                    @can('manage-users')
                         <li class="{{ isActiveRoute('users.*') }}">
                             <a href="#users" class="iq-waves-effect collapsed" data-toggle="collapse"
                                 aria-expanded="false"><i class="ri-user-line"></i><span>{{ ___('Manage Users') }}</span><i
                                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                             <ul id="users" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                @can('add-users')
+                                @can('manage-users')
                                     <li class="{{ isActiveRoute('users.create') }}"><a href="{{ route('users.create') }}"><i
                                                 class="ri-user-add-line"></i>{{ ___('Add Users') }}</a>
                                     </li>
                                 @endcan
-                                @can('view-users')
+                                @can('manage-users')
                                     <li class="{{ isActiveRoute('users.index') }}"><a href="{{ route('users.index') }}"><i
                                                 class="ri-file-list-line"></i>{{ ___('Users List') }}</a></li>
                                 @endcan
@@ -49,19 +49,19 @@
                     @endcan
 
                     {{-- Staff Users --}}
-                    @can('view-staff-users')
+                    @can('manage-staff-users')
                         <li class="{{ isActiveRoute('admins.*') }}">
                             <a href="#admins" class="iq-waves-effect collapsed" data-toggle="collapse"
                                 aria-expanded="false"><i
                                     class="ri-admin-line"></i><span>{{ ___('Manage admins') }}</span><i
                                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                             <ul id="admins" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                @can('add-staff-users')
+                                @can('manage-staff-users')
                                     <li class="{{ isActiveRoute('admins.create') }}"><a href="{{ route('admins.create') }}"><i
                                                 class="ri-user-add-line"></i>{{ ___('Add admins') }}</a>
                                     </li>
                                 @endcan
-                                @can('view-staff-users')
+                                @can('manage-staff-users')
                                     <li class="{{ isActiveRoute('admins.index') }}"><a href="{{ route('admins.index') }}"><i
                                                 class="ri-file-list-line"></i>{{ ___('admins List') }}</a></li>
                                 @endcan
@@ -73,7 +73,7 @@
                     <li class="iq-menu-title"><i
                             class="ri-subtract-line"></i><span>{{ ___('Business Management') }}</span></li>
                     {{-- brands --}}
-                    @can('view-brands')
+                    @can('manage-brands')
                         <li class="{{ isActiveRoute('brands.*') }}">
                             <a href="#brands" class="iq-waves-effect collapsed" data-toggle="collapse"
                                 aria-expanded="false">
@@ -81,7 +81,7 @@
                                     class="ri-arrow-right-s-line iq-arrow-right"></i>
                             </a>
                             <ul id="brands" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                @can('add-brands')
+                                @can('manage-brands')
                                     <li class="{{ isActiveRoute('brands.create') }}">
                                         <a href="{{ route('brands.create') }}">
                                             <i class="ri-add-box-line"></i>{{ ___('Add Brand') }}
@@ -113,7 +113,7 @@
                     @endcan
 
                     {{-- Categories --}}
-                    @can('view-categories')
+                    @can('manage-categories')
                         <li class="{{ isActiveRoute('categories.*') }}">
                             <a href="#categories" class="iq-waves-effect collapsed" data-toggle="collapse"
                                 aria-expanded="false">
@@ -121,7 +121,7 @@
                                     class="ri-arrow-right-s-line iq-arrow-right"></i>
                             </a>
                             <ul id="categories" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                @can('add-categories')
+                                @can('manage-categories')
                                     <li class="{{ isActiveRoute('categories.create') }}">
                                         <a href="{{ route('categories.create') }}">
                                             <i class="ri-add-box-line"></i>{{ ___('Add Category') }}
