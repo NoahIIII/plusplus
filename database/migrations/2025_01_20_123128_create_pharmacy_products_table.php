@@ -15,14 +15,13 @@ return new class extends Migration
             $table->id('product_id');
             $table->json('name');
             $table->json('description');
-            $table->foreign('brand_id')
+            $table->foreignId('brand_id')
             ->nullable()
-            ->references('brand_id')
-            ->on('brands')
+            ->constrained('brands','brand_id')
             ->onDelete('set null');
             $table->unsignedFloat('price')->nullable();
             $table->unsignedInteger('quantity')->nullable();
-            $table->engine('status');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

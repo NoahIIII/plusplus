@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Categories\StoreCategoryRequest;
-use App\Http\Requests\Dashboard\Categories\StoreSubCategoryRequest;
-use App\Http\Requests\Dashboard\Categories\StoreSubSubCategoryRequest;
+use App\Http\Requests\Dashboard\Categories\UpdateCategoryRequest;
 use App\Models\BusinessType;
 use App\Models\Category;
 use App\Services\CategoryService;
@@ -62,7 +60,24 @@ class CategoryController extends Controller
     public function edit(int $categoryId)
     {
         $category = Category::findOrFail($categoryId);
-        return view('categories.edit', compact('category'));
+        // Fetch parent categories based on the current category's level
+        $parentCategories = [];
+        if ($category->level > 1) {
+            $parentCategories = Category::where('level', $category->level - 1)->get();
+        }
+        $businesses = BusinessType::all();
+        return view('categories.edit', get_defined_vars());
+    }
+
+    /**
+     * update category
+     * @param Category $category
+     * @param UpdateCategoryRequest $request
+     */
+    public function update(Category $category, UpdateCategoryRequest $request) {
+        $categoryData = $request->validated();
+        $this->categoryService->update($category, $categoryData);
+        return ApiResponseTrait::apiResponse([], __('messages.updated'), [], 200);
     }
 
     /**
@@ -73,6 +88,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        // delete all child categories
         $childCategories = Category::where('parent_id', $category->category_id)->get();
         if (count($childCategories) > 0) {
             $childCategories->each(function ($childCategory) {

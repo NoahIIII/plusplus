@@ -108,4 +108,10 @@ return array (
   'manage_categories' => 'Manage Categories',
   'manage_products' => 'Manage Products',
   'manage_staff_users' => 'Manage Staff Users',
+  'edit_category' => 'Edit Category',
+  'update' => 'Update',
+  'this_category_has_children_you_cannot_change_its_level_until_you_remove_the_child_categories' => 'This category has children. You cannot change its level until you remove the child categories.',
+  'oops_this_page_is_not_found' => 'Oops! This Page is Not Found.',
+  'the_page_you_requested_was_not_found' => 'The page you requested was not found.',
+  'back_to_home' => 'Back to Home',
 );

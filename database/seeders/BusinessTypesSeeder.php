@@ -19,6 +19,7 @@ class BusinessTypesSeeder extends Seeder
                     'ar' => 'صيدلية',
                 ],
                 'slug' => 'pharmacy',
+                'icon'=>'ri-hospital-line'
             ],
             // [
             //     'name' => [

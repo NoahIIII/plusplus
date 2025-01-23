@@ -46,6 +46,23 @@ class CategoryService
         // Create and return the category
         Category::create($data);
     }
+
+    /**
+     * update category
+     * @param array $data
+     */
+    public function update(Category $category, array $data)
+    {
+        // Combine translations for the name
+        $data['name'] = [
+            'en' => $data['name_en'] ?? '',
+            'ar' => $data['name_ar'] ?? ''
+        ];
+
+        // Set default status if not provided
+        $data['status'] = $data['status'] ?? 0;
+        $category->update($data);
+    }
     /**
      * Validate the category based on the level.
      *
@@ -128,4 +145,6 @@ class CategoryService
                 ];
             });
     }
+
+
 }

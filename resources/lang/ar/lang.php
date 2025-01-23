@@ -104,7 +104,14 @@ return array (
   'you_will_not_be_able_to_recover_this_data' => 'لن تتمكن من استعادة هذه البيانات!',
   'yes_delete_it' => 'نعم، احذفها!',
   'no_cancel' => 'لا، إلغاء!',
-  'manage_categories' => 'Manage Categories',
-  'manage_products' => 'Manage Products',
-  'manage_staff_users' => 'Manage Staff Users',
+  'manage_categories' => 'إدارة الفئات',
+  'manage_products' => 'إدارة المنتجات',
+  'manage_staff_users' => 'إدارة المستخدمين (الطاقم)',
+  'edit_category' => 'تعديل الفئة',
+  'update' => 'تحديث',
+  'this_category_has_children_you_cannot_change_its_level_until_you_remove_the_child_categories' => 'هذه الفئة تحتوي على فئات فرعية. لا يمكنك تغيير مستواها حتى تقوم بإزالة الفئات الفرعية.',
+  'oops_this_page_is_not_found' => 'عذرًا! لم يتم العثور على هذه الصفحة.',
+'the_page_you_requested_was_not_found' => 'الصفحة التي طلبتها غير موجودة.',
+'back_to_home' => 'الرجوع إلى الصفحة الرئيسية'
+,
 );

@@ -94,7 +94,7 @@
                                         <li>
                                             <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
                                                 aria-expanded="false"><i
-                                                class="ri-menu-line"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
+                                                class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
                                                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                                             <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
                                                 <li
@@ -134,7 +134,7 @@
                                         <li>
                                             <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
                                                 aria-expanded="false"><i
-                                                class="ri-menu-line"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
+                                                class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
                                                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                                             <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
                                                 <li

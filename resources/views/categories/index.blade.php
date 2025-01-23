@@ -29,7 +29,10 @@
                                         <td>
                                             @if ($category->children->isNotEmpty())
                                                 <a
-                                                    href="{{ route('categories.index', ['parent_id' => $category->category_id, 'slug' => request()->segment(3)]) }}">
+                                                    href="{{ route('categories.index', [
+                                                        'parent_id' => $category->category_id,
+                                                        'slug' => request()->segment(request()->segment(1) === app()->getLocale() ? 4 : 3),
+                                                    ]) }}">
                                                     {{ $category->getTranslation('name', 'ar') }}
                                                 </a>
                                             @else
@@ -39,7 +42,10 @@
                                         <td>
                                             @if ($category->children->isNotEmpty())
                                                 <a
-                                                    href="{{ route('categories.index', ['parent_id' => $category->category_id, 'slug' => request()->segment(3)]) }}">
+                                                    href="{{ route('categories.index', [
+                                                        'parent_id' => $category->category_id,
+                                                        'slug' => request()->segment(request()->segment(1) === app()->getLocale() ? 4 : 3),
+                                                    ]) }}">
                                                     {{ $category->getTranslation('name', 'en') }}
                                                 </a>
                                             @else

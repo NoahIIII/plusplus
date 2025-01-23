@@ -41,8 +41,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 ->name('users.store');
             Route::get('/edit/{userId}', [UserController::class, 'edit'])
                 ->name('users.edit');
-            Route::get('/{userId}', [UserController::class, 'show'])
-                ->name('users.show');
+            // Route::get('/{userId}', [UserController::class, 'show'])
+            //     ->name('users.show');
             Route::put('/update/{user}', [UserController::class, 'update'])
                 ->name('users.update');
             Route::delete('/destroy/{user}', [UserController::class, 'destroy'])
@@ -59,8 +59,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 ->name('admins.store');
             Route::get('/edit/{staffUserId}', [StaffUserController::class, 'edit'])
                 ->name('admins.edit');
-            Route::get('/{staffUserId}', [StaffUserController::class, 'show'])
-                ->name('admins.show');
+            // Route::get('/{staffUserId}', [StaffUserController::class, 'show'])
+            //     ->name('admins.show');
             Route::put('/update/{staffUser}', [StaffUserController::class, 'update'])
                 ->name('admins.update');
             Route::delete('/destroy/{staffUser}', [StaffUserController::class, 'destroy'])
@@ -77,8 +77,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 ->name('brands.store');
             Route::get('/edit/{brandId}', [BrandController::class, 'edit'])
                 ->name('brands.edit');
-            Route::get('/{brandId}', [BrandController::class, 'show'])
-                ->name('brands.show');
+            // Route::get('/{brandId}', [BrandController::class, 'show'])
+            //     ->name('brands.show');
             Route::put('/update/{brand}', [BrandController::class, 'update'])
                 ->name('brands.update');
             Route::delete('/destroy/{brand}', [BrandController::class, 'destroy'])
