@@ -89,12 +89,12 @@
                                     </li>
                                 @endcan
 
-                                @foreach (App\Models\BusinessType::all() as $businessType)
+                                @foreach ($businessTypes as $businessType)
                                     <ul>
                                         <li>
                                             <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
                                                 aria-expanded="false"><i
-                                                class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
+                                                    class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
                                                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                                             <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
                                                 <li
@@ -129,12 +129,12 @@
                                     </li>
                                 @endcan
 
-                                @foreach (App\Models\BusinessType::all() as $businessType)
+                                @foreach ($businessTypes as $businessType)
                                     <ul>
                                         <li>
                                             <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
                                                 aria-expanded="false"><i
-                                                class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
+                                                    class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
                                                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                                             <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
                                                 <li
@@ -168,10 +168,9 @@
                 </div>
             </div>
             <nav class="navbar navbar-expand-lg navbar-light p-0">
-
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <i class="ri-menu-3-line"></i>
                 </button>
                 <div class="iq-menu-bt align-self-center">
@@ -195,8 +194,6 @@
                                 @endforeach
                             </div>
                         </li>
-
-
                         <li class="nav-item">
                             <a href="#" class="search-toggle iq-waves-effect">
                                 <div id="lottie-beil"></div>
@@ -342,6 +339,7 @@
                                 </div>
                             </div>
                         </li>
+
                     </ul>
                 </div>
                 <ul class="navbar-list">

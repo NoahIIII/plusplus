@@ -103,5 +103,23 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                 ->name('categories.destroy');
             Route::get('/get/by-level', [CategoryController::class, 'getCategoriesByLevel']);
         });
+
+        //--------------------------------- Products Routes ------------------------------------------
+        Route::group(['prefix' => 'pharmacy-products', 'middleware' => 'permission:manage-products'], function () {
+            Route::get('/type/{slug}', [ProductController::class, 'index'])
+                ->name('products.index');
+            Route::get('/create', [ProductController::class, 'create'])
+                ->name('products.create');
+            Route::post('/store', [ProductController::class, 'store'])
+                ->name('products.store');
+            Route::get('/edit/{productId}', [ProductController::class, 'edit'])
+                ->name('products.edit');
+            // Route::get('/{productId}', [ProductController::class, 'show'])
+            //     ->name('products.show');
+            Route::put('/update/{product}', [ProductController::class, 'update'])
+                ->name('products.update');
+            Route::delete('/destroy/{product}', [ProductController::class, 'destroy'])
+                ->name('products.destroy');
+        });
     });
 });

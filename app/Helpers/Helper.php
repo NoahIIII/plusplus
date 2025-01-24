@@ -94,3 +94,13 @@ if (!function_exists('isActiveRoute')) {
     }
 }
 
+/**
+ * get current business type from the url
+ */
+if (!function_exists('getBusinessType')) {
+    function getBusinessType()
+    {
+        return request()->segment(1);
+    }
+}
+

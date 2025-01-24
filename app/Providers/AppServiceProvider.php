@@ -19,6 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->share('businessTypes', \App\Models\BusinessType::all());
     }
 }
