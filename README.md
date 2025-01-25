@@ -8,8 +8,8 @@
   - Attach product variants, such as different sizes, colors, or other attributes.
   - Set product prices and manage stock levels for each variant.
   
-  <img src="https://raw.githubusercontent.com/NoahIIII/plusplus/main/screens/code1.png" width="300" />
-  <img src="https://raw.githubusercontent.com/NoahIIII/plusplus/main/screens/Screen1.png" width="300" />
+  <img src="https://raw.githubusercontent.com/NoahIIII/plusplus/main/screens/code1.png" width="600" />
+  <img src="https://raw.githubusercontent.com/NoahIIII/plusplus/main/screens/Screen1.png" width="700" />
 
 - **Payment Integration:** 
   - Integration with payment gateways like for handling payments securely.
