@@ -151,6 +151,45 @@
                             </ul>
                         </li>
                     @endcan
+                    {{-- Products --}}
+                    @can('manage-products')
+                        <li class="{{ request()->segment(3) == 'products' || request()->segment(2) == 'products' ? 'active' : ''}}">
+                            <a href="#products" class="iq-waves-effect collapsed" data-toggle="collapse"
+                                aria-expanded="false">
+                                <i class="ri-shopping-cart-line"></i><span>{{ ___('products') }}</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i>
+                            </a>
+                            <ul id="products" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+
+                                @foreach ($businessTypes as $businessType)
+                                    <ul>
+                                        <li>
+                                            <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
+                                                aria-expanded="false"><i
+                                                    class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
+                                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                                            <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
+                                                <li
+                                                    class="{{ isActiveRoute("$businessType->slug.products.index", 'active') }}">
+                                                    <a href="{{ route("$businessType->slug.products.index") }}">
+                                                        <i class="ri-file-list-line"></i>
+                                                        {{ ___('Products List') }}
+                                                    </a>
+                                                </li>
+                                                <li
+                                                    class="{{ isActiveRoute("$businessType->slug.products.create", 'active') }}">
+                                                    <a href="{{ route("$businessType->slug.products.create") }}">
+                                                        <i class="ri-add-box-line"></i>
+                                                        {{ ___('Create Product') }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endcan
                 </ul>
             </nav>
             <div class="p-3"></div>

@@ -12,7 +12,7 @@ return [
         'tablet' => 'Tablet',
         'capsule' => 'Capsule',
         'ml' => 'Milliliter',
-        'gram' => 'Gram',
+        'g' => 'Gram',
         'unit' => 'Unit',
         'unknown' => 'Unknown',
     ],

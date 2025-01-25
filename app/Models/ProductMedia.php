@@ -9,4 +9,5 @@ class ProductMedia extends Model
 {
     use HasFactory;
     protected $table = 'product_media';
+    protected $fillable = ['mediable_id','mediable_type', 'media'];
 }

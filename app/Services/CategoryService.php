@@ -14,7 +14,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class CategoryService
 {
 
-
     /**
      * Store a category.
      *

@@ -20,7 +20,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->enum('package_type', PackageType::values());
             $table->enum('unit_type', UnitType::values());
-            $table->unsignedInteger('package_quantity')->nullable();
+            $table->unsignedInteger('unit_quantity')->nullable();
             $table->unsignedInteger('stock_quantity')->nullable();
             $table->unsignedFloat('price')->nullable();
             $table->timestamps();

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\MainController;
+use App\Http\Controllers\Dashboard\PharmacyProductController;
 use App\Http\Controllers\Dashboard\StaffUserAuthController;
 use App\Http\Controllers\Dashboard\StaffUserController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -105,21 +106,21 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         });
 
         //--------------------------------- Products Routes ------------------------------------------
-        Route::group(['prefix' => 'pharmacy-products', 'middleware' => 'permission:manage-products'], function () {
-            Route::get('/type/{slug}', [ProductController::class, 'index'])
-                ->name('products.index');
-            Route::get('/create', [ProductController::class, 'create'])
-                ->name('products.create');
-            Route::post('/store', [ProductController::class, 'store'])
-                ->name('products.store');
-            Route::get('/edit/{productId}', [ProductController::class, 'edit'])
-                ->name('products.edit');
-            // Route::get('/{productId}', [ProductController::class, 'show'])
-            //     ->name('products.show');
-            Route::put('/update/{product}', [ProductController::class, 'update'])
-                ->name('products.update');
-            Route::delete('/destroy/{product}', [ProductController::class, 'destroy'])
-                ->name('products.destroy');
-        });
+            Route::group(['prefix' => 'pharmacy/products', 'middleware' => 'permission:manage-products'], function () {
+                Route::get('/', [PharmacyProductController::class, 'index'])
+                    ->name('pharmacy.products.index');
+                Route::get('/create', [PharmacyProductController::class, 'create'])
+                    ->name('pharmacy.products.create');
+                Route::post('/store', [PharmacyProductController::class, 'store'])
+                    ->name('pharmacy.products.store');
+                Route::get('/edit/{productId}', [PharmacyProductController::class, 'edit'])
+                    ->name('pharmacy.products.edit');
+                Route::get('/{productId}', [PharmacyProductController::class, 'show'])
+                    ->name('pharmacy.products.show');
+                Route::put('/update/{product}', [PharmacyProductController::class, 'update'])
+                    ->name('pharmacy.products.update');
+                Route::delete('/destroy/{product}', [PharmacyProductController::class, 'destroy'])
+                    ->name('pharmacy.products.destroy');
+            });
     });
 });

@@ -28,4 +28,15 @@ class PackageType
             default => __('enums.package_type.unknown'),
         };
     }
+    public static function unitForPackage(string $packageType): string
+    {
+        $map = [
+            self::BOTTLE => 'ml',
+            self::STRIP => 'unit',
+            self::AMPOULE => 'ml',
+            self::TABLET => 'tablet',
+        ];
+
+        return $map[$packageType] ?? 'unknown';
+    }
 }

@@ -11,9 +11,9 @@ class PharmacyProduct extends Model
     use HasFactory;
     use HasTranslations;
 
-    public $translatable = ['name','description'];
-    protected $table='pharmacy_products';
-    protected $primaryKey ='product_id';
+    public $translatable = ['name', 'description'];
+    protected $table = 'pharmacy_products';
+    protected $primaryKey = 'product_id';
     protected $fillable = [
         'brand_id',
         'name',
@@ -30,7 +30,11 @@ class PharmacyProduct extends Model
     }
     public function categories()
     {
-        return $this->morphToMany(Category::class, 'categoryable');
+        return $this->morphToMany(Category::class, 'categoryable', 'product_categories', 'categoryable_id', 'category_id');
     }
 
+    public function packageTypes()
+    {
+        return $this->hasMany(PackageType::class, 'product_id');
+    }
 }

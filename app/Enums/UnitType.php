@@ -8,6 +8,7 @@ class UnitType
     public const CAPSULE = 'capsule';
     public const ML = 'ml';
     public const GRAM = 'g';
+    public const UNIT = 'unit';
 
     public static function values(): array
     {
@@ -16,6 +17,7 @@ class UnitType
             self::CAPSULE,
             self::ML,
             self::GRAM,
+            self::UNIT
         ];
     }
 
@@ -25,7 +27,8 @@ class UnitType
             self::TABLET => __('enums.unit_type.tablet'),
             self::CAPSULE => __('enums.unit_type.capsule'),
             self::ML => __('enums.unit_type.ml'),
-            self::GRAM => __('enums.unit_type.gram'),
+            self::GRAM => __('enums.unit_type.g'),
+            self::UNIT => __('enums.unit_type.unit'),
             default => __('enums.unit_type.unknown'),
         };
     }

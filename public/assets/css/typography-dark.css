@@ -44,7 +44,7 @@ body.dark {background: var(--iq-dark-body-bg); color: var(--iq-dark-body-text)}
 /* sidebar */
 .dark .iq-sidebar {  background: var(--iq-dark-card-bg); }
 .dark .iq-sidebar-menu .iq-menu li.active>a{background: var(--iq-dark-hover-bg);}
-.dark .iq-sidebar-menu .iq-menu li a:hover{color: var(--iq-dark-body-text); background: var(--iq-dark-hover-bg);} 
+.dark .iq-sidebar-menu .iq-menu li a:hover{color: var(--iq-dark-body-text); background: var(--iq-dark-hover-bg);}
 .dark .iq-sidebar-menu .iq-menu li a {color: var(--iq-dark-icon-color);}
 .dark .iq-sidebar-menu .iq-menu li a[aria-expanded="true"]{background: var(--iq-dark-hover-bg);}
 .dark .iq-sidebar-menu .iq-menu .iq-submenu{background: var(--iq-dark-body-bg);}
@@ -261,7 +261,7 @@ body.dark {background: var(--iq-dark-body-bg); color: var(--iq-dark-body-text)}
 .dark button.close-popup{color: var(--iq-dark-body-text);}
 .dark .chat-user-detail-popup{background: var(--iq-dark-card-bg);}
 .dark .nav-pills li a.active{background: var(--iq-dark-hover-bg) ; color: var(--iq-dark-body-text) ; border-radius: 8px;}
-@media (max-width: 991px){.dark .chat-data-left {background: var(--iq-dark-card-bg);} 
+@media (max-width: 991px){.dark .chat-data-left {background: var(--iq-dark-card-bg);}
 .dark button.close-btn-res {color: var(--iq-dark-body-text);}
 .dark #sidebar-toggle {background: var(--iq-dark-hover-bg); color:var(--iq-dark-icon-color)}
 }

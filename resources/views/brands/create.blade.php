@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">{{ ___('Business Type') }}</label>
                             <select name="business_type_id" class="form-control" id="exampleFormControlSelect1">
-                                <option selected="" disabled="">{{ ___('Select Your Brand Business Type') }}</option>
+                                <option selected="" disabled="">{{ ___('Select Your Category Business Type') }}</option>
                                 @foreach ($businesses as $business )
                                     <option value="{{ $business->id }}">{{ $business->getTranslation('name', app()->getLocale()) }}</option>
                                 @endforeach
