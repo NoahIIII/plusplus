@@ -1,7 +1,3 @@
-# E-commerce Platform for Multiple Business Types
-
-This project is an e-commerce platform designed to manage various business types, including pharmacies, supermarkets, and laundromats. It provides functionality to handle business-specific products, categories, subcategories, brands, payment integrations, a points system, wallet functionality, and discount offers. The platform also supports dynamic product variant management, such as different sizes or colors for each product.
-
 ## Features
 
 - **Multiple Business Types:** Manage pharmacies, supermarkets, and laundromats, each with its own dedicated pages for relevant products, categories, and brands.
@@ -11,6 +7,10 @@ This project is an e-commerce platform designed to manage various business types
   - Add, edit, and manage products within each business type.
   - Attach product variants, such as different sizes, colors, or other attributes.
   - Set product prices and manage stock levels for each variant.
+  
+  ![Product Management Screenshot 1](https://raw.githubusercontent.com/NoahIIII/plusplus/main/screens/Screen1.png)
+  ![Product Management Screenshot 2](https://raw.githubusercontent.com/NoahIIII/plusplus/main/screens/code1.png)
+
 - **Payment Integration:** 
   - Integration with payment gateways like for handling payments securely.
   - Allow customers to make payments for orders, with support for various payment methods.
@@ -19,8 +19,3 @@ This project is an e-commerce platform designed to manage various business types
 - **Points System:** A reward-based points system where users can earn points for various actions (e.g., purchases, reviews) and redeem them for discounts or products.
 - **Wallet System:** A virtual wallet where users can add funds, use them to make purchases, and track their balance and transactions.
 - **Discount Offers:** Create and manage discount offers for products or categories, providing customers with promotional discounts during checkout.
-
-## Current Status
-
-- **Under Development:** The project is still in progress, with several features yet to be fully implemented.
-
