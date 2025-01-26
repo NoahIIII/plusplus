@@ -144,6 +144,13 @@ return array (
   'quantity_in_stock' => 'الكمية في المخزن',
   'unit_type' => 'نوع الوحدة',
   'remove_variant' => 'إزالة المتغير',
-  'add_product_variant' => 'Add Product Variant',
-  'select_your_category_business_type' => 'Select Your Category Business Type',
+'add_product_variant' => 'إضافة خيار المنتج',
+'select_your_category_business_type' => 'اختر نوع عمل الفئة',
+'price' => 'السعر',
+'quantity' => 'الكمية',
+'actions' => 'الإجراءات',
+'search' => 'بحث',
+'show_menu_entries' => 'عرض _MENU_ مدخلات',
+'showing_start_to_end_of_total_entries' => 'عرض _START_ إلى _END_ من _TOTAL_ المدخلات',
+
 );

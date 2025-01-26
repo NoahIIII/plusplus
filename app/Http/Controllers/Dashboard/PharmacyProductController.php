@@ -7,24 +7,31 @@ use App\Http\Requests\Dashboard\Products\StoreProductRequest;
 use App\Models\Brand;
 use App\Models\BusinessType;
 use App\Models\Category;
+use App\Models\PharmacyProduct;
+use App\Pipelines\Filters\DataTableNameFilter;
 use App\Services\BusinessTypeService;
 use App\Services\ProductService;
+use App\Services\StorageService;
 use App\Traits\ApiResponseTrait;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 
 class PharmacyProductController extends ProductController
 {
     protected $businessesTypeId;
-    public function __construct(BusinessTypeService $businessTypeService, private ProductService $productService) {
-        parent::__construct($businessTypeService,$productService);
+    public function __construct(BusinessTypeService $businessTypeService, private ProductService $productService)
+    {
+        parent::__construct($businessTypeService, $productService);
         $this->businessesTypeId = $businessTypeService->getBusinessId('pharmacy');
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
 
+    /**
+     * get products
+     */
+    public function getProducts(Request $request)
+    {
+        return $this->productService->filterProducts($request);
     }
 
     /**
@@ -41,18 +48,12 @@ class PharmacyProductController extends ProductController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(string $id) {}
 
     /**
      * Update the specified resource in storage.
@@ -67,8 +68,7 @@ class PharmacyProductController extends ProductController
      */
     public function destroy(string $id)
     {
-        //
+        $this->productService->destroyPharmacyProduct($id);
+        return back()->with('Success', __('messages.deleted'));
     }
-
 }
-

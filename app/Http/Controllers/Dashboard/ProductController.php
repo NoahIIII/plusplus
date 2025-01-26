@@ -11,6 +11,7 @@ use App\Models\BusinessType;
 use App\Models\Category;
 use App\Services\BusinessTypeService;
 use App\Services\ProductService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -82,6 +83,6 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
 }

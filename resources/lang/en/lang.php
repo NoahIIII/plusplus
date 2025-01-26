@@ -147,4 +147,10 @@ return array (
   'remove_variant' => 'Remove Variant',
   'add_product_variant' => 'Add Product Variant',
   'select_your_category_business_type' => 'Select Your Category Business Type',
+  'price' => 'Price',
+  'quantity' => 'Quantity',
+  'actions' => 'Actions',
+  'search' => 'Search',
+  'show_menu_entries' => 'Show _MENU_ entries',
+  'showing_start_to_end_of_total_entries' => 'Showing _START_ to _END_ of _TOTAL_ entries',
 );

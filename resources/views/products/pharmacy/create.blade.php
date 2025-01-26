@@ -81,7 +81,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">{{ ___('Categories') }}*</label>
-                            <select name="categories[]" multiple="multiple" class="form-control js-example-basic-multiple"
+                            <select name="categories[]" class="form-control"
                                 id="exampleFormControlSelect2">
                                 {{-- <option selected="" disabled="">{{ ___('Select Your Product Category') }}</option> --}}
                                 @foreach ($categories as $category)

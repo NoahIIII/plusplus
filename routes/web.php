@@ -119,8 +119,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     ->name('pharmacy.products.show');
                 Route::put('/update/{product}', [PharmacyProductController::class, 'update'])
                     ->name('pharmacy.products.update');
-                Route::delete('/destroy/{product}', [PharmacyProductController::class, 'destroy'])
+                Route::delete('/destroy/{productId}', [PharmacyProductController::class, 'destroy'])
                     ->name('pharmacy.products.destroy');
+                Route::get('/get/products', [PharmacyProductController::class, 'getProducts'])
+                ->name('pharmacy-products.data');
             });
     });
 });
