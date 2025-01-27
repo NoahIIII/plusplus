@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Models\PharmacyProduct;
+use App\Models\ProductMedia;
 use App\Pipelines\Filters\DataTableProductFilter;
 use App\Pipelines\Filters\SortingPipeline;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\DB;
 
@@ -40,6 +42,48 @@ class ProductService
             DB::rollBack();
             throw $e; // Re-throw the exception
         }
+    }
+
+    /**
+     * update pharmacy product
+     *
+     * @param $product
+     * @param array $data
+     */
+    public function updatePharmacyProduct(PharmacyProduct $product, array $data)
+    {
+        // format product data
+        $productData = $this->formatProductData($data);
+
+        try {
+            // Start transaction
+            DB::beginTransaction();
+            $product->update($productData['product']);
+            // sync product categories
+            $product->categories()->sync($productData['categories']);
+            // save product media & get the paths
+            if (isset($data['images'])) {
+                $productData['media'] = $this->processProductMedia($data['images']);
+                $product->media()->createMany($productData['media']);
+            }
+            // delete product media
+            if (isset($data['deleted_media_ids'])) {
+                $media = $product->media()->whereIn('id', $data['deleted_media_ids'])->get();
+                $this->deleteProductMedia($media);
+            }
+            // store product packages (variants)
+            if (isset($productData['variants'])) {
+                $this->updateProductVariants($productData['variants'], $product);
+            } else {
+                $product->packageTypes()->delete();
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        return ApiResponseTrait::apiResponse([], __('admin.lot_is_required'), [1 => __('admin.lot_is_required')], 422);
     }
     /**
      * Destroy Pharmacy Products (with it's media&variants)
@@ -121,6 +165,7 @@ class ProductService
      */
     private function processProductMedia(array $media)
     {
+        // store the new media
         $paths = [];
         foreach ($media as $medium) {
             $paths[] = ['media' => StorageService::storeImage($medium, 'pharmacy-products', 'product-')];
@@ -188,9 +233,43 @@ class ProductService
                 'actions' => view('components.delete-button', [
                     'route' => route('pharmacy.products.destroy', $product->product_id),
                     'title' => __('Delete')
-                ])->render(),
+                ])->render() .
+                    '<a class="iq-bg-primary ml-2" data-placement="top" title="' . __('Edit') . '"
+                    data-original-title="' . __('Edit') . '"
+                    href="' . route('pharmacy.products.edit', $product->product_id) . '">
+                    <i class="ri-pencil-line"></i>
+                </a>',
             ];
         }
         return $data;
+    }
+
+    /**
+     * handle product variants update
+     * @param $variants
+     * @param $product
+     */
+    private function updateProductVariants($variants, $product)
+    {
+        // get product variant to delete
+        $productVariantsIds = $product->packageTypes()->pluck('id')->toArray();
+        $variantsToDelete = array_diff($productVariantsIds, array_column($variants, 'id'));
+        // delete product variants
+        if ($variantsToDelete) $product->packageTypes()->whereIn('id', $variantsToDelete)->delete();
+
+        // update product variants
+        foreach ($variants as $variant) {
+            if (isset($variant['id'])) {
+                $product->packageTypes()->where('id', $variant['id'])->update([
+                    'package_type' => $variant['package_type'],
+                    'unit_type' => $variant['unit_type'],
+                    'unit_quantity' => $variant['unit_quantity'],
+                    'stock_quantity' => $variant['stock_quantity'],
+                    'price' => $variant['price'],
+                ]);
+            } else {
+                $product->packageTypes()->create($variant);
+            }
+        }
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\PackageType;
+use App\Enums\UnitType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Products\StoreProductRequest;
+use App\Http\Requests\Dashboard\Products\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\BusinessType;
 use App\Models\Category;
@@ -53,14 +56,27 @@ class PharmacyProductController extends ProductController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {}
+    public function edit(string $id) {
+        $product = PharmacyProduct::findOrFail($id);
+        $productCategories =  $product->categories->pluck('category_id')->toArray();
+        $categories = Category::where('business_type_id', $this->businessesTypeId)
+        ->where('level',3)
+        ->get();
+        $brands = Brand::all();
+        $packageTypes = PackageType::values();
+        $unitTypes = UnitType::values();
+        $product->variants = $product->packageTypes()->get();
+        return view('products.pharmacy.edit', get_defined_vars());
+    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, PharmacyProduct $product)
     {
-        //
+        $productData = $request->validated();
+        $this->productService->updatePharmacyProduct($product, $productData);
+        return ApiResponseTrait::apiResponse([], __('messages.updated'), [], 200);
     }
 
     /**

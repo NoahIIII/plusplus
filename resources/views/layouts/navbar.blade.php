@@ -163,7 +163,7 @@
 
                                 @foreach ($businessTypes as $businessType)
                                     <ul>
-                                        <li>
+                                        <li class="{{ request()->segment(1) == $businessType->slug || request()->segment(2) == $businessType->slug ? 'active' : ''}}">
                                             <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
                                                 aria-expanded="false"><i
                                                     class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i

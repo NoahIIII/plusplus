@@ -6,6 +6,7 @@ use App\Enums\PackageType;
 use App\Enums\UnitType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Products\StoreProductRequest;
+use App\Http\Requests\Dashboard\Products\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\BusinessType;
 use App\Models\Category;
@@ -66,14 +67,6 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
     {
         //
     }

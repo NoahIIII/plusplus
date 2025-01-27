@@ -68,7 +68,7 @@
                                                     <x-delete-button :route="route('categories.destroy', $category)" title="{{ ___('Delete') }}" />
                                                 @endcan
                                                 @can('manage-categories')
-                                                    <a class="iq-bg-primary ml-2" data-placement="top" title=""
+                                                    <a class="iq-bg-primary ml-2" data-placement="top" title="{{ ___('Edit') }}"
                                                         data-original-title="{{ ___('Edit') }}"
                                                         href="{{ route('categories.edit', $category->category_id) }}">
                                                         <i class="ri-pencil-line"></i>

@@ -1,7 +1,4 @@
 @extends('layouts.app')
-<link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.bootstrap5.css">
-
-
 @section('title', ___('Products'))
 @section('content')
     <div class="row">

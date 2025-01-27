@@ -153,4 +153,12 @@ return array (
   'search' => 'Search',
   'show_menu_entries' => 'Show _MENU_ entries',
   'showing_start_to_end_of_total_entries' => 'Showing _START_ to _END_ of _TOTAL_ entries',
+  'edit_product' => 'Edit Product',
+  'update_images' => 'Update Images',
+  'are_you_sure_you_want_to_delete_this_image' => 'Are you sure you want to delete this image?',
+  'add_new_variant' => 'Add New Variant',
+  'delete_this_image_permanently' => 'Delete this image permanently?',
+  'new_files_selected' => 'new files selected',
+  'files_selected' => 'files selected',
+  'clear_all_variants' => 'Clear All Variants',
 );

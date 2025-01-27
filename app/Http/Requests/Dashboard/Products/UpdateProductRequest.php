@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests\Dashboard\Products;
 
+use Illuminate\Foundation\Http\FormRequest;
 use App\Enums\PackageType;
 use App\Enums\UnitType;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -39,10 +39,13 @@ class StoreProductRequest extends FormRequest
             ],
             'price' => 'required|numeric|min:1',
             'quantity' => 'required|numeric|min:1',
-            'images' => 'required|array',
+            'images' => 'nullable|array',
             'images.*' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'deleted_media_ids'=>'nullable|array',
+            'deleted_media_ids.*' => 'required|exists:product_media,id',
             'status' => 'nullable|boolean',
             'variants' => 'nullable|array',
+            'variants.*.id' => 'nullable|exists:package_types,id',
             'variants.*.package_type' => ['required', Rule::in(PackageType::values())],
             'variants.*.unit_type' => ['required', Rule::in(UnitType::values())],
             'variants.*.price' => 'nullable|numeric|min:1',
@@ -50,4 +53,5 @@ class StoreProductRequest extends FormRequest
             'variants.*.stock_quantity' => 'nullable|numeric|min:1',
         ];
     }
+
 }
