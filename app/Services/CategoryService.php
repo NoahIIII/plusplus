@@ -131,9 +131,6 @@ class CategoryService
 
         // Get the current locale
         $locale = app()->getLocale();
-
-        Category::where('level', $level)
-            ->get(['category_id', 'name']);
         // Fetch categories based on the level
         return Category::where('level', $level)
             ->get(['category_id', 'name']) // Fetch only the ID and name columns

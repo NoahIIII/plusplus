@@ -43,7 +43,6 @@
                     </div>
                 </div>
                 <br>
-
                 <!-- Category Level and Parent Category -->
                 <div class="row">
                     <div class="col">
@@ -58,7 +57,7 @@
                         <label for="parent_id">{{ ___('Parent Category') }}</label>
                         <select name="parent_id" class="form-control" id="parent_id" disabled>
 
-                            <!-- Options will be dynamically loaded via JavaScript -->
+
                         </select>
                     </div>
                 </div>

@@ -69,7 +69,7 @@ class StaffUserController extends Controller
         if ($request->super_admin) {
             $staffUser->assignRole('super-admin');
         }
-        return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.added'));
     }
 
     /**
@@ -120,7 +120,7 @@ class StaffUserController extends Controller
         } else {
             $staffUser->removeRole('super-admin');
         }
-        return ApiResponseTrait::apiResponse([], __('messages.updated'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.updated'));
     }
 
     /**

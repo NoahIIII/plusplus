@@ -12,6 +12,7 @@ use App\Models\BusinessType;
 use App\Models\Category;
 use App\Services\BusinessTypeService;
 use App\Services\ProductService;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -77,5 +78,18 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
 
+    }
+
+    /**
+     * fetch products data
+     */
+    public function getProductsByBusinessType($businessTypeId)
+    {
+        try {
+            $products = $this->productService->getProductsByBusinessType($businessTypeId);
+            return ApiResponseTrait::successResponse($products);
+        } catch (\Exception $e) {
+            return ApiResponseTrait::errorResponse($e->getMessage(),422);
+        }
     }
 }

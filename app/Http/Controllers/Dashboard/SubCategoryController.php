@@ -24,6 +24,6 @@ class SubCategoryController extends Controller
         $categoryData = $request->validated();
         // store the category
         $this->categoryService->store($categoryData);
-        return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.added'));
     }
 }

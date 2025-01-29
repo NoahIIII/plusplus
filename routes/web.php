@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\DiscountController;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Controllers\Dashboard\PharmacyProductController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\StaffUserAuthController;
 use App\Http\Controllers\Dashboard\StaffUserController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -123,6 +125,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     ->name('pharmacy.products.destroy');
                 Route::get('/get/products', [PharmacyProductController::class, 'getProducts'])
                 ->name('pharmacy-products.data');
+            });
+            Route::get('/products/{businessId}', [ProductController::class, 'getProductsByBusinessType'])
+            ->middleware('permission:manage-products');
+
+            //----------------------------- Discounts Routes ---------------------------------------------
+            Route::group(['prefix' => 'discounts', 'middleware' => 'permission:manage-discounts'], function () {
+                Route::get('/', [DiscountController::class, 'getDiscounts'])
+                    ->name('discounts.index');
+                Route::get('/create', [DiscountController::class, 'createDiscount'])
+                    ->name('discounts.create');
+                Route::post('/store', [DiscountController::class, 'storeDiscount'])
+                    ->name('discounts.store');
+                Route::get('/edit/{discountId}', [DiscountController::class, 'edit'])
+                    ->name('discounts.edit');
+                Route::get('/{discountId}', [DiscountController::class, 'show'])
+                    ->name('discounts.show');
+                Route::put('/update/{discount}', [DiscountController::class, 'update'])
+                    ->name('discounts.update');
+                Route::delete('/destroy/{discount}', [DiscountController::class, 'destroy'])
+                    ->name('discounts.destroy');
             });
     });
 });

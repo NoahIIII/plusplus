@@ -56,7 +56,7 @@ class BrandController extends Controller
         }
         //create new brand
         Brand::create($brandData);
-        return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.added'));
     }
 
     /**
@@ -97,7 +97,7 @@ class BrandController extends Controller
         }
         // update brand
         $brand->update($brandData);
-        return ApiResponseTrait::apiResponse([], __('messages.updated'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.updated'));
     }
 
     /**

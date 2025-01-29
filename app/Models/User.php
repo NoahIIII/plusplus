@@ -21,13 +21,13 @@ class User extends Authenticatable
     protected $primaryKey = 'user_id';
     protected $fillable = [
         'name',
-        'email',
-        'password',
         'phone',
+        'phone_verified_at',
         'user_img',
         'locale',
         'status',
         'online_status',
+        'points',
     ];
 
     /**
@@ -36,7 +36,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 

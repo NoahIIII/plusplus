@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use App\Models\BusinessType;
 use App\Models\PharmacyProduct;
 use App\Models\ProductMedia;
 use App\Pipelines\Filters\DataTableProductFilter;
 use App\Pipelines\Filters\SortingPipeline;
 use App\Traits\ApiResponseTrait;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\DB;
 
@@ -83,7 +85,6 @@ class ProductService
             DB::rollBack();
             throw $e;
         }
-        return ApiResponseTrait::apiResponse([], __('admin.lot_is_required'), [1 => __('admin.lot_is_required')], 422);
     }
     /**
      * Destroy Pharmacy Products (with it's media&variants)
@@ -134,6 +135,31 @@ class ProductService
             'recordsFiltered' => $filteredCount,
             'data' => $data
         ]);
+    }
+
+    /**
+     * get product by business type
+     *
+     * @param int $businessTypeId
+     */
+    public function getProductsByBusinessType(int $businessTypeId)
+    {
+        $businessType = BusinessType::find($businessTypeId);
+        if (!$businessType) {
+            throw new ValidationException(__('messages.not-found'));
+        }
+        $modelClass = $businessType->model;
+        // Check if the model class exists
+        if (!class_exists($modelClass)) {
+            throw new ValidationException(__('messages.not-found'));
+        }
+        return $modelClass::get(['product_id', 'name'])
+            ->map(function ($product) {
+                return [
+                    'id' => $product->product_id,
+                    'name' => $product->name,
+                ];
+            });
     }
     /**
      * get product data from the request

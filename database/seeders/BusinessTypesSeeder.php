@@ -19,7 +19,8 @@ class BusinessTypesSeeder extends Seeder
                     'ar' => 'صيدلية',
                 ],
                 'slug' => 'pharmacy',
-                'icon'=>'ri-hospital-line'
+                'icon'=>'ri-hospital-line',
+                'model' => 'App\Models\PharmacyProduct',
             ],
             // [
             //     'name' => [

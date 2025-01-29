@@ -16,7 +16,7 @@
                                 <div class="col">
                                     <input name="search" value="{{ request('search') }}" type="text"
                                         class="text search-input form-control"
-                                        placeholder="{{ ___('Search by name, phone or email...') }}">
+                                        placeholder="{{ ___('Search by name or phone...') }}">
                                     @error('search')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -32,10 +32,10 @@
                                 <tr>
                                     <th>{{ ___('User Image') }}</th>
                                     <th>{{ ___('Name') }}</th>
-                                    <th>{{ ___('Email') }}</th>
                                     <th>{{ ___('Phone') }}</th>
-                                    <th>{{ ___('Email Verified') }}</th>
+                                    <th>{{ ___('Phone Verified') }}</th>
                                     <th>{{ ___('Status') }}</th>
+                                    <th>{{ ___('Points') }}</th>
                                     <th>{{ ___('Join Date') }}</th>
                                     <th></th>
 
@@ -48,10 +48,9 @@
                                                 src="{{ getImageUrl($user->user_img) ?? asset('assets/images/user/default_user.png') }}"
                                                 alt="profile"></td>
                                         <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
                                         <td>
-                                            @if ($user->email_verified_at)
+                                            @if ($user->phone_verified_at)
                                                 <span class="badge iq-bg-success">{{ ___('Verified') }}</span>
                                             @else
                                                 <span class="badge iq-bg-warning">{{ ___('Not Verified') }}</span>
@@ -65,6 +64,7 @@
                                                 <span class="badge iq-bg-danger">{{ ___('Inactive') }}</span>
                                             @endif
                                         </td>
+                                        <td>{{ $user->points }}</td>
                                         <td>{{ $user->formatted_created_at }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action">

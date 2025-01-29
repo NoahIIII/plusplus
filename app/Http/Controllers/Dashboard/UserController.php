@@ -48,7 +48,7 @@ class UserController extends Controller
         }
         // create new user
         User::create($userData);
-        return ApiResponseTrait::apiResponse([],__('messages.added'),[],200);
+        return ApiResponseTrait::successResponse([],__('messages.added'));
     }
 
     /**
@@ -87,7 +87,7 @@ class UserController extends Controller
         }
         $userData['status'] = $request->status ?? 0;
         $user->update($userData);
-        return ApiResponseTrait::apiResponse([],__('messages.updated'),[],200);
+        return ApiResponseTrait::successResponse([],__('messages.updated'));
     }
 
     /**

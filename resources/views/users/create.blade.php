@@ -29,11 +29,6 @@
                         <input name="name" type="text" class="form-control" id="name"
                             placeholder="{{ ___('Full Name') }}">
                     </div>
-                    <div class="col">
-                        <label for="email">{{ ___('Email') }}*</label>
-                        <input name="email" type="text" class="form-control" id="email"
-                            placeholder="{{ ___('Email') }}">
-                    </div>
                 </div>
                 <br>
                 <div class="row">
@@ -41,11 +36,6 @@
                         <label for="phone">{{ ___('Phone') }}</label>
                         <input name="phone" type="text" class="form-control" id="phone"
                             placeholder="{{ ___('Phone') }}">
-                    </div>
-                    <div class="col">
-                        <label for="password">{{ ___('Password') }}*</label>
-                        <input name="password" type="text" class="form-control" id="password"
-                            placeholder="{{ ___('Password') }}">
                     </div>
                 </div>
                 <br>

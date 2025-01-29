@@ -50,7 +50,7 @@ class CategoryController extends Controller
         }
         // store the category
         $this->categoryService->store($categoryData);
-        return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.added'));
     }
 
     /**
@@ -77,7 +77,7 @@ class CategoryController extends Controller
     public function update(Category $category, UpdateCategoryRequest $request) {
         $categoryData = $request->validated();
         $this->categoryService->update($category, $categoryData);
-        return ApiResponseTrait::apiResponse([], __('messages.updated'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.updated'));
     }
 
     /**

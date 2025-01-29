@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Dashboard\Users;
+namespace App\Http\Requests\Public;
 
-use App\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +23,9 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name'=>'required|min:1|max:50',
-            'phone'=>'required|numeric|unique:users,phone',
-            'user_img'=>'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'status'=>'nullable|boolean',
+            'email'=>'required|email|unique:users,email',
+            'password'=>'required|min:8',
+
         ];
-    }
-    public function failedValidation($validator)
-    {
-        return ApiResponseTrait::failedValidation($validator, [], null, 422);
     }
 }

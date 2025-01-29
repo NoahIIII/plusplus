@@ -45,7 +45,7 @@ class PharmacyProductController extends ProductController
     {
         $productData = $request->validated();
         $this->productService->storePharmacyProduct($productData);
-        return ApiResponseTrait::apiResponse([], __('messages.added'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.added'));
     }
 
     /**
@@ -76,7 +76,7 @@ class PharmacyProductController extends ProductController
     {
         $productData = $request->validated();
         $this->productService->updatePharmacyProduct($product, $productData);
-        return ApiResponseTrait::apiResponse([], __('messages.updated'), [], 200);
+        return ApiResponseTrait::successResponse([], __('messages.updated'));
     }
 
     /**
