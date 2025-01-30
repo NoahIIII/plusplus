@@ -190,6 +190,45 @@
                             </ul>
                         </li>
                     @endcan
+                    {{-- discounts --}}
+                    @can('manage-discounts')
+                        <li class="{{ isActiveRoute('discounts.*') }}">
+                            <a href="#discounts" class="iq-waves-effect collapsed" data-toggle="collapse"
+                                aria-expanded="false">
+                                <i class="ri-percent-line"></i><span>{{ ___('Discounts') }}</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i>
+                            </a>
+                            <ul id="discounts" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                @can('manage-discounts')
+                                    <li class="{{ isActiveRoute('discounts.create') }}">
+                                        <a href="{{ route('discounts.create') }}">
+                                            <i class="ri-add-box-line"></i>{{ ___('Add Discount') }}
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @foreach ($businessTypes as $businessType)
+                                    <ul>
+                                        <li>
+                                            <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
+                                                aria-expanded="false"><i
+                                                    class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
+                                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                                            <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
+                                                <li
+                                                    class="{{ isActiveRoute('discounts.index', 'active', $businessType->slug) }}">
+                                                    <a href="{{ route('discounts.index', $businessType->slug) }}">
+                                                        <i class="ri-file-list-line"></i>
+                                                        {{ ___('Discounts List') }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endcan
                 </ul>
             </nav>
             <div class="p-3"></div>

@@ -179,4 +179,10 @@ return array (
   'error_loading_products' => 'Error loading products',
   'no_products_available' => 'No products available',
   'error' => 'Error: ',
+  'discounts' => 'Discounts',
+  'add_discount' => 'Add Discount',
+  'discounts_list' => 'Discounts List',
+  'discount_number' => 'Discount Number',
+  'select_discount_products' => 'Select Discount Products',
+  'edit_discount' => 'Edit Discount',
 );

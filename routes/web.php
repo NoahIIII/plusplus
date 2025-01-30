@@ -109,7 +109,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //--------------------------------- Products Routes ------------------------------------------
             Route::group(['prefix' => 'pharmacy/products', 'middleware' => 'permission:manage-products'], function () {
-                Route::get('/', [PharmacyProductController::class, 'index'])
+                Route::get('/}', [PharmacyProductController::class, 'index'])
                     ->name('pharmacy.products.index');
                 Route::get('/create', [PharmacyProductController::class, 'create'])
                     ->name('pharmacy.products.create');
@@ -131,11 +131,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
             //----------------------------- Discounts Routes ---------------------------------------------
             Route::group(['prefix' => 'discounts', 'middleware' => 'permission:manage-discounts'], function () {
-                Route::get('/', [DiscountController::class, 'getDiscounts'])
+                Route::get('/type/{slug}', [DiscountController::class, 'index'])
                     ->name('discounts.index');
-                Route::get('/create', [DiscountController::class, 'createDiscount'])
+                Route::get('/create', [DiscountController::class, 'create'])
                     ->name('discounts.create');
-                Route::post('/store', [DiscountController::class, 'storeDiscount'])
+                Route::post('/store', [DiscountController::class, 'store'])
                     ->name('discounts.store');
                 Route::get('/edit/{discountId}', [DiscountController::class, 'edit'])
                     ->name('discounts.edit');

@@ -77,7 +77,7 @@
             </div>
         </div>
         <div class="iq-card-body">
-            <form id="discountForm" action="{{ route('discounts.store') }}" method="POST">
+            <form id="discountForm" data-action="{{ route('discounts.store') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col">
@@ -165,7 +165,7 @@
     </div>
 
     {{-- Ajax Script --}}
-    {{-- <script>
+    <script>
         var autoForm = $("#discountForm");
 
         $(autoForm).on('submit', function(event) {
@@ -205,7 +205,7 @@
                 }
             });
         });
-    </script> --}}
+    </script>
     {{-- Select 2 --}}
     <script>
         $(document).ready(function() {
