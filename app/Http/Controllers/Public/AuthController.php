@@ -11,6 +11,7 @@ use App\Services\OTPService;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 
 class AuthController extends Controller
 {
@@ -34,6 +35,18 @@ class AuthController extends Controller
      */
     public function verifyOTP(VerifyOTPRequest $request)
     {
+        // Rate Limiting
+        $key = $request->ip();
+        $maxAttempts = 5;
+        $decaySeconds = env('RATE_LIMIT_DECAY_SECONDS', 60);
+        if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
+            return ApiResponseTrait::errorResponse(
+                __('auth.too_many_requests'),
+                429,
+                ['retry_after' => RateLimiter::availableIn($key)]
+            );
+        }
+        RateLimiter::hit($key, $decaySeconds);
         // get request data
         $phone = $request->validated()['phone'];
         $code = $request->validated()['code'];
