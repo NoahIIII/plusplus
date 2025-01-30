@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class OTP extends Model
 {
     use HasFactory;
+    protected $table = 'otps';
+
+    protected $fillable = [
+        'phone',
+        'code',
+        'expires_at',
+    ];
 }

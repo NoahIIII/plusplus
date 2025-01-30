@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Public;
+namespace App\Http\Requests\Public\Auth;
 
+use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class SendOTPRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +23,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|min:1|max:50',
-            'email'=>'required|email|unique:users,email',
-            'password'=>'required|min:8',
-
+            'phone'=>['required', 'digits_between:10,15',new PhoneNumber()],
         ];
     }
 }

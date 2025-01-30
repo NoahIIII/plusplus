@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Public\AccountController;
+use App\Http\Controllers\Public\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//----------------------------------- Auth Routes ------------------------------------------------------
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/signin', [AuthController::class, 'sendOTP']);
+    Route::post('/verify-otp', [AuthController::class, 'verifyOTP']);
 });
+
+//----------------------------------- User Account Routes ------------------------------------------------------
+Route::group(['prefix' => 'account', 'middleware' => 'user_authentication'], function () {
+    Route::patch('/update', [AccountController::class, 'updateAccountDetails']);
+});
+
+Route::get('/test', function () {
+    return 'hi';
+})->middleware('user_authentication');
