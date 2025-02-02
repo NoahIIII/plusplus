@@ -19,7 +19,7 @@ class CategoryService
      *
      * @param array $data
      */
-    public function store(array $data)
+    public function store(array $data,$image)
     {
         // Combine translations for the name
         $data['name'] = [
@@ -41,6 +41,7 @@ class CategoryService
             $data['level'] = 1; // Main category
             $data['parent_id'] = null;
         }
+        $data['image']= StorageService::storeImage($image, 'categories', 'category-');
 
         // Create and return the category
         Category::create($data);
@@ -50,7 +51,7 @@ class CategoryService
      * update category
      * @param array $data
      */
-    public function update(Category $category, array $data)
+    public function update(Category $category, array $data,$image = null)
     {
         // Combine translations for the name
         $data['name'] = [
@@ -60,6 +61,11 @@ class CategoryService
 
         // Set default status if not provided
         $data['status'] = $data['status'] ?? 0;
+        // handle the image
+        if ($image) {
+            if($category->image) StorageService::deleteImage($category->image);
+            $data['image'] = StorageService::storeImage($image, 'categories', 'category-');
+        }
         $category->update($data);
     }
     /**
@@ -85,7 +91,7 @@ class CategoryService
                 return $request->validate((new StoreSubSubCategoryRequest)->rules());
 
             default:
-                return response()->json(['error' => 'Invalid category level', 'level' => $request->all()], 400);
+                return response()->json(['error' => 'Invalid category level', 'level' => $request->level], 400);
         }
     }
 

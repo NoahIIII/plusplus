@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Public\CategoryController;
 use App\Http\Controllers\Public\AccountController;
 use App\Http\Controllers\Public\AuthController;
+use App\Http\Controllers\Public\BusinessTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +27,17 @@ Route::group(['prefix' => 'auth'], function () {
 //----------------------------------- User Account Routes ------------------------------------------------------
 Route::group(['prefix' => 'account', 'middleware' => 'user_authentication'], function () {
     Route::patch('/update', [AccountController::class, 'updateAccountDetails']);
+    Route::patch('/update-business-type', [AccountController::class, 'updateBusinessType']);
+});
+
+//------------------------------------ Business Types Routes ------------------------------------------------------
+Route::group(['prefix' => '/business-types'], function () {
+    Route::get('/', [BusinessTypeController::class, 'getBusinessTypes']);
+});
+
+//------------------------------------ Categories Routes ------------------------------------------------------
+Route::group(['prefix' => '/categories', 'middleware' => 'user_authentication'], function () {
+    Route::get('/', [CategoryController::class, 'getCategories']);
 });
 
 Route::get('/test', function () {

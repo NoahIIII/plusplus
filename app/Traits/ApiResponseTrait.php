@@ -6,7 +6,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 trait ApiResponseTrait
 {
-    public static function successResponse($data = [], $message = '', $status = 200)
+    public static function successResponse($data = [], $message = null, $status = 200)
     {
         $response = response()
             ->json([
@@ -18,7 +18,7 @@ trait ApiResponseTrait
         return $response;
     }
 
-    public static function errorResponse($message = '', $status = 400, $details = [], $code = null)
+    public static function errorResponse($message = null, $status = 400, $details = [], $code = null)
     {
         // Use HTTP status code as the default code if none is provided
         $errorCode = $code ?? (string)$status;

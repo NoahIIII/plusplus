@@ -38,7 +38,8 @@ class UpdateCategoryRequest extends FormRequest
             'level' => [
                 'nullable',
                 Rule::in([1, 2, 3])
-            ]
+            ],
+            'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }
 }

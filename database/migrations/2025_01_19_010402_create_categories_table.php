@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id('category_id');
             $table->json('name');
+            $table->string('image')->nullable();
             $table->boolean('status')->default(1);
             $table->foreignId('business_type_id')->nullable()
             ->constrained('business_types','id')

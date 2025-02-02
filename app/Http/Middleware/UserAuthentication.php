@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Traits\ApiResponseTrait;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -15,7 +16,10 @@ class UserAuthentication
     public function handle($request, Closure $next)
     {
         // Rate Limiting
+        $user = null;
+        $newToken = null;
         $key = $request->ip();
+
         $maxAttempts = env('RATE_LIMIT_ATTEMPTS', 60);
         $decaySeconds = env('RATE_LIMIT_DECAY_SECONDS', 60);
 
@@ -30,30 +34,23 @@ class UserAuthentication
         RateLimiter::hit($key, $decaySeconds);
 
         // JWT Authentication
-        $newToken = null;
-
         try {
-            // Try to authenticate the user with the access token
+            // Authenticate user with the access token
             $user = JWTAuth::parseToken()->authenticate();
+            Auth::payload(); // This will trigger TokenExpiredException if token is expired
         } catch (TokenExpiredException $e) {
             try {
-                // If token is expired, attempt to refresh it using the refresh token
+                // Refresh the token
                 $newToken = JWTAuth::refresh(JWTAuth::getToken());
-
-                // Set the refreshed token and re-authenticate the user
                 $user = JWTAuth::setToken($newToken)->toUser();
             } catch (TokenExpiredException $e) {
-                // If the refresh token expired, force the user to log in again
-                return ApiResponseTrait::errorResponse(__('auth.session_expired'), 401, ['force_logout' => true]);
+                return ApiResponseTrait::errorResponse(__('auth.session_expired'), 401, ['try_manual_refresh' => true]);
             } catch (JWTException $e) {
-                // If token refresh fails for any reason, return an error
                 return ApiResponseTrait::errorResponse(__('auth.token_refresh_failed'), 401);
             }
         } catch (TokenInvalidException $e) {
-            // If the token is invalid, return an invalid token error
             return ApiResponseTrait::errorResponse(__('auth.invalid_token'), 401);
         } catch (JWTException $e) {
-            // If the token is absent or missing, return an error
             return ApiResponseTrait::errorResponse(__('auth.token_absent'), 401);
         }
 
@@ -70,7 +67,13 @@ class UserAuthentication
         $response = $next($request);
 
         if ($newToken) {
-            $response->headers->set('Authorization', 'Bearer ' . $newToken);
+            $content = json_decode($response->getContent(), true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                $content = [];
+            }
+
+            return $response->header('Authorization', 'Bearer ' . $newToken)
+                ->setContent(array_merge($content, ['new_token' => $newToken]));
         }
 
         return $response;

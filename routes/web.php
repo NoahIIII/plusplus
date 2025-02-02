@@ -109,7 +109,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         //--------------------------------- Products Routes ------------------------------------------
             Route::group(['prefix' => 'pharmacy/products', 'middleware' => 'permission:manage-products'], function () {
-                Route::get('/}', [PharmacyProductController::class, 'index'])
+                Route::get('/', [PharmacyProductController::class, 'index'])
                     ->name('pharmacy.products.index');
                 Route::get('/create', [PharmacyProductController::class, 'create'])
                     ->name('pharmacy.products.create');

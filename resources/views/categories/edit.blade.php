@@ -104,6 +104,17 @@
                                 for="customSwitch2">{{ ___('Status') }}*</label>
                         </div>
                     </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="mb-3">
+                                <img id="currentImage" src="{{ getImageUrl($category->image) }}" alt="Current category Image" class="img-thumbnail" style="max-width: 150px;">
+                            </div>
+                            <div class="custom-file">
+                                <input name="image" type="file" class="custom-file-input" id="customFile" />
+                                <label class="custom-file-label" for="customFile">{{ ___('Category Image') }}</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <br>
 

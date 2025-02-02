@@ -185,4 +185,7 @@ return array (
   'discount_number' => 'Discount Number',
   'select_discount_products' => 'Select Discount Products',
   'edit_discount' => 'Edit Discount',
+  'all_notifications' => 'All Notifications',
+  'all_messages' => 'All Messages',
+  'category_image' => 'Category Image',
 );

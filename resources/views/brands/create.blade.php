@@ -54,6 +54,7 @@
                                 <input name="image" type="file" class="custom-file-input" id="customFile" />
                                 <label class="custom-file-label" for="customFile">{{ ___('Brand Image') }}</label>
                             </div>
+                            <div class="image-preview-container mt-3 row" id="imagePreview"></div>
                         </div>
                     </div>
                 </div>
@@ -113,5 +114,46 @@
     </script>
 
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // File input change handler
+        document.getElementById('customFile').addEventListener('change', function(e) {
+            // Update label text
+            const label = this.nextElementSibling;
+            label.textContent = this.files.length + ' files selected';
 
+            // Clear previous previews
+            const previewContainer = document.getElementById('imagePreview');
+            previewContainer.innerHTML = '';
+
+            // Create image previews
+            Array.from(this.files).forEach((file, index) => {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'col-md-2 mb-3';
+                    div.innerHTML = `
+                    <div class="card">
+                        <img src="${e.target.result}" class="card-img-top preview-image" alt="Preview">
+                        <div class="card-body p-2">
+                            <small class="text-muted">${file.name}</small>
+                        </div>
+                    </div>
+                `;
+                    previewContainer.appendChild(div);
+                };
+
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Reset label when no files selected
+        document.getElementById('customFile').addEventListener('click', function() {
+            if (this.files.length === 0) {
+                this.nextElementSibling.textContent = '{{ ___('Brand Image') }}';
+            }
+        });
+    });
+</script>
 @endsection

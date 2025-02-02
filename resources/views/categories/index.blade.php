@@ -15,6 +15,7 @@
                             aria-describedby="user-list-page-info">
                             <thead>
                                 <tr>
+                                    <th>{{ ___('Category Image') }}</th>
                                     <th>{{ ___('Name In Arabic') }}</th>
                                     <th>{{ ___('Name In English') }}</th>
                                     <th>{{ ___('Status') }}</th>
@@ -26,6 +27,7 @@
                             <tbody>
                                 @foreach ($categories as $category)
                                     <tr>
+                                        <td class="text-center"><img class="rounded-circle img-fluid avatar-40" src="{{ getImageUrl($category->image) ?? asset('assets/images/user/default_user.png') }}" alt="profile"></td>
                                         <td>
                                             @if ($category->children->isNotEmpty())
                                                 <a

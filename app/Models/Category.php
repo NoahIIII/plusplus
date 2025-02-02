@@ -20,8 +20,22 @@ class Category extends Model
         'business_type_id',
         'parent_id',
         'level',
+        'image'
     ];
     protected $primaryKey = 'category_id';
+
+
+
+    //----------------------------- Accessors ------------------------------
+
+    public function getImageAttribute($value)
+    {
+        if (request()->is('api/*')) {
+            return getImageUrl($value);
+        }
+        return $value;
+    }
+
 
     //-------------------------- Relations ----------------------------------
 

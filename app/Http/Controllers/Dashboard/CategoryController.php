@@ -49,7 +49,7 @@ class CategoryController extends Controller
             return $categoryData;
         }
         // store the category
-        $this->categoryService->store($categoryData);
+        $this->categoryService->store($categoryData,$request->file('image'));
         return ApiResponseTrait::successResponse([], __('messages.added'));
     }
 
@@ -76,7 +76,8 @@ class CategoryController extends Controller
      */
     public function update(Category $category, UpdateCategoryRequest $request) {
         $categoryData = $request->validated();
-        $this->categoryService->update($category, $categoryData);
+        $categoryImage = $request->file('image') ?? null;
+        $this->categoryService->update($category, $categoryData,$categoryImage);
         return ApiResponseTrait::successResponse([], __('messages.updated'));
     }
 

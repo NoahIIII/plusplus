@@ -37,31 +37,31 @@ class OTPService {
     public function verifyOTP($phone,$code)
     {
         $user = User::where('phone', $phone)->first();
-        if(!$user){
-            return ApiResponseTrait::errorResponse(__('messages.not-found'),404);
-        }
-        $otp = OTP::where('phone', $user->phone)->where('code', $code)->first();
+        // if(!$user){
+        //     return ApiResponseTrait::errorResponse(__('messages.not-found'),404);
+        // }
+        // $otp = OTP::where('phone', $user->phone)->where('code', $code)->first();
 
-        // check if the otp exists
-        if (!$otp) {
-            return ApiResponseTrait::errorResponse(__('messages.invalid-otp'),400);
-        }
+        // // check if the otp exists
+        // if (!$otp) {
+        //     return ApiResponseTrait::errorResponse(__('messages.invalid-otp'),400);
+        // }
 
-        // $otp->expires_at is a string, convert it to a Carbon instance
-        $expiresAt = Carbon::parse($otp->expires_at);
+        // // $otp->expires_at is a string, convert it to a Carbon instance
+        // $expiresAt = Carbon::parse($otp->expires_at);
 
-        // Check if the OTP is expired
-        if ($expiresAt->isBefore(now())) {
-            return ApiResponseTrait::errorResponse(__('messages.expired-otp'),400);
-        }
+        // // Check if the OTP is expired
+        // if ($expiresAt->isBefore(now())) {
+        //     return ApiResponseTrait::errorResponse(__('messages.expired-otp'),400);
+        // }
 
-        // delete the otp
-        $otp->delete();
+        // // delete the otp
+        // $otp->delete();
 
-        // verify user phone
-        if ($user->phone_verified_at == null) {
-            $user->phone_verified_at = now();
-        }
+        // // verify user phone
+        // if ($user->phone_verified_at == null) {
+        //     $user->phone_verified_at = now();
+        // }
         return $user;
     }
 }

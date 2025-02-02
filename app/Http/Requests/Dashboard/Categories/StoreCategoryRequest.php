@@ -25,7 +25,8 @@ class StoreCategoryRequest extends FormRequest
             'name_en'=>'required|string|min:1|max:50',
             'name_ar'=>'required|string|min:1|max:50',
             'status'=>'nullable|boolean',
-            'business_type_id'=>'required|exists:business_types,id'
+            'business_type_id'=>'required|exists:business_types,id',
+            'image'=>'required|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }
 }

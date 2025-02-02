@@ -22,6 +22,9 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->boolean('online_status')->default(0);
             $table->unsignedInteger('points')->default(0);
+            $table->foreignId('business_type_id')
+            ->nullable()
+            ->constrained('business_types','id');
             $table->rememberToken();
             $table->timestamps();
         });
