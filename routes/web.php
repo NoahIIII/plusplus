@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\DiscountController;
 use App\Http\Controllers\Dashboard\MainController;
 use App\Http\Controllers\Dashboard\PharmacyProductController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffUserAuthController;
 use App\Http\Controllers\Dashboard\StaffUserController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -145,6 +146,24 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     ->name('discounts.update');
                 Route::delete('/destroy/{discount}', [DiscountController::class, 'destroy'])
                     ->name('discounts.destroy');
+            });
+
+            //---------------------------- Sections ---------------------------------------------
+            Route::group(['prefix' => 'sections', 'middleware' => 'permission:manage-sections'], function () {
+                Route::get('/type/{slug}', [SectionController::class, 'index'])
+                ->name('sections.index');
+            Route::get('/create', [SectionController::class, 'create'])
+                ->name('sections.create');
+            Route::post('/store', [SectionController::class, 'store'])
+                ->name('sections.store');
+            Route::get('/edit/{sectionId}', [SectionController::class, 'edit'])
+                ->name('sections.edit');
+            Route::get('/{sectionId}', [SectionController::class, 'show'])
+                ->name('sections.show');
+            Route::put('/update/{section}', [SectionController::class, 'update'])
+                ->name('sections.update');
+            Route::delete('/destroy/{section}', [SectionController::class, 'destroy'])
+                ->name('sections.destroy');
             });
     });
 });

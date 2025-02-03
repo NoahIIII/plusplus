@@ -26,6 +26,7 @@ class RolesAndPermissionsSeeder extends Seeder
             "manage-categories",
             "manage-products",
             "manage-discounts",
+            "manage-sections",
         ];
 
         foreach ($permissions as $permission) {

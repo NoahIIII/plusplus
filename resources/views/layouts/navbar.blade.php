@@ -229,6 +229,43 @@
                             </ul>
                         </li>
                     @endcan
+                    {{-- Sections --}}
+                    @can('manage-sections')
+                        <li class="{{ isActiveRoute('sections.*') }}">
+                            <a href="#sections" class="iq-waves-effect collapsed" data-toggle="collapse"
+                                aria-expanded="false">
+                                <i class="ri-folder-3-line"></i><span>{{ ___('Sections') }}</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i>
+                            </a>
+                            <ul id="sections" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                    <li class="{{ isActiveRoute('sections.create') }}">
+                                        <a href="{{ route('sections.create') }}">
+                                            <i class="ri-add-box-line"></i>{{ ___('Add Section') }}
+                                        </a>
+                                    </li>
+
+                                @foreach ($businessTypes as $businessType)
+                                    <ul>
+                                        <li>
+                                            <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
+                                                aria-expanded="false"><i
+                                                    class="{{ $businessType->icon ?? 'ri-menu-line' }}"></i><span>{{ $businessType->getTranslation('name', app()->getLocale()) }}</span><i
+                                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                                            <ul id="sub-menu" class="iq-submenu iq-submenu-data collapse">
+                                                <li
+                                                    class="{{ isActiveRoute('sections.index', 'active', $businessType->slug) }}">
+                                                    <a href="{{ route('sections.index', $businessType->slug) }}">
+                                                        <i class="ri-file-list-line"></i>
+                                                        {{ ___('Sections List') }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endcan
                 </ul>
             </nav>
             <div class="p-3"></div>

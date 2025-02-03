@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 
 class ProductService
 {
-
     /**
      * store pharmacy products
      * @param array $data

@@ -37,7 +37,8 @@ Route::group(['prefix' => '/business-types'], function () {
 
 //------------------------------------ Categories Routes ------------------------------------------------------
 Route::group(['prefix' => '/categories', 'middleware' => 'user_authentication'], function () {
-    Route::get('/', [CategoryController::class, 'getCategories']);
+    Route::get('/', [CategoryController::class, 'getMainCategories']);
+    Route::get('/children/{parentId}', [CategoryController::class, 'getChildCategories']);
 });
 
 Route::get('/test', function () {

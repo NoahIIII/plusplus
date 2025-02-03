@@ -56,6 +56,25 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
+    // parent relation
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+    public function getParentNameAttribute()
+{
+    // Check if the category has a parent and return the localized name (en or ar)
+    if ($this->parent) {
+        // Assuming you're using the 'name' column stored as JSON, we'll fetch the correct language
+        $locale = app()->getLocale(); // This gets the current language set (either 'en' or 'ar')
+
+        // Return the name in the specified locale, defaulting to 'en' if the field is not available
+        return $this->parent->name[$locale] ?? $this->parent->name['en'];
+    }
+
+    return null; // If no parent exists, return null
+}
+
 
     public function pharmacyProducts()
     {

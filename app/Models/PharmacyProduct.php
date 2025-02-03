@@ -37,4 +37,8 @@ class PharmacyProduct extends Model
     {
         return $this->hasMany(PackageType::class, 'product_id');
     }
+    public function sections()
+    {
+        return $this->morphMany(SectionProduct::class, 'productable');
+    }
 }
