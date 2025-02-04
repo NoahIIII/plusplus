@@ -47,7 +47,6 @@ class BrandController extends Controller
     {
         //get the request data
         $brandData = $request->validated();
-        $brandData['status'] = $request->status ?? 0;
         $name = ['en'=>$request->name_en,'ar'=>$request->name_ar];
         $brandData['name'] = $name;
         //store image

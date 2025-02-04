@@ -103,7 +103,7 @@
                                 <option selected="" disabled="">{{ ___('Select Your Section Business Type') }}
                                 </option>
                                 @foreach ($businesses as $business)
-                                    <option value="{{ $business->id }}">
+                                    <option @if($section->business_type_id == $business->id) selected @endif value="{{ $business->id }}">
                                         {{ $business->getTranslation('name', app()->getLocale()) }}</option>
                                 @endforeach
                             </select>
@@ -136,6 +136,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="custom-control custom-switch custom-control-inline">
+                            <input type="hidden" name="status" value="0">
                             <input name="status" value="1" type="checkbox" class="custom-control-input"
                                 id="customSwitch2" @if ($section->status) checked="" @endif>
                             <label class="custom-control-label" value="1"
@@ -155,6 +156,10 @@
         </div>
     </div>
 
+        {{-- define the discount product ids for the javascript --}}
+        <script>
+            const discountProductIds = @json($section->sectionProducts->pluck('productable_id'));
+        </script>
 
     <script>
         var autoForm = $("#sectionForm");

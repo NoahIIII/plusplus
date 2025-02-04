@@ -142,10 +142,11 @@
                 <div class="row">
                     <div class="col">
                         <div class="custom-control custom-switch custom-control-inline">
+                            <input type="hidden" name="status" value="0">
+
                             <input name="status" value="1" type="checkbox" class="custom-control-input"
-                                id="customSwitch2" @if($discount->status) checked="" @endif>
-                            <label class="custom-control-label" value="1"
-                                for="customSwitch2">{{ ___('Status') }}*</label>
+                                id="customSwitch2" @if($discount->status) checked @endif>
+                            <label class="custom-control-label" for="customSwitch2">{{ __('Status') }}*</label>
                         </div>
                     </div>
                     <div class="col">

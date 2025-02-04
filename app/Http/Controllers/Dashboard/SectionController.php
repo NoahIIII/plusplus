@@ -8,10 +8,14 @@ use App\Http\Requests\Dashboard\Sections\UpdateSectionRequest;
 use App\Models\BusinessType;
 use App\Models\Section;
 use App\Models\SectionProduct;
+use App\Services\SectionService;
+use App\Services\TranslateService;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
+    public function __construct(private SectionService $sectionService) {}
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +26,8 @@ class SectionController extends Controller
             ->select('id')
             ->first();
         $businessType ?? abort(404);
-        return view('sections.index');
+        $sections = Section::where('business_type_id', $businessType->id)->paginate(20);
+        return view('sections.index', compact('sections'));
     }
     /**
      * the create form view
@@ -36,7 +41,12 @@ class SectionController extends Controller
      * store new section
      * @param StoreSectionRequest $request
      */
-    public function store(StoreSectionRequest $request) {}
+    public function store(StoreSectionRequest $request)
+    {
+        $service = $this->sectionService->storeService($request->validated());
+        if ($service instanceof \Illuminate\Http\JsonResponse) return $service;
+        return ApiResponseTrait::successResponse([], __('messages.added'));
+    }
     /**
      * show the form for editing the specified resource.
      */
@@ -54,9 +64,10 @@ class SectionController extends Controller
     /**
      * destroy a section
      */
-    public function destroy(Section $section) {
+    public function destroy(Section $section)
+    {
         // delete section products
-        SectionProduct::where('section_id',$section->section_id)->delete();
+        SectionProduct::where('section_id', $section->section_id)->delete();
         $section->delete();
         return back()->with('Success', __('messages.deleted'));
     }

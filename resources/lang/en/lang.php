@@ -202,4 +202,5 @@ return array (
   'second_color' => 'Second Color',
   'select_product' => 'Select Product',
   'select_section_products' => 'Select Section Products',
+  'edit_section' => 'Edit Section',
 );

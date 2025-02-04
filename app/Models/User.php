@@ -49,6 +49,13 @@ class User extends Authenticatable implements JWTSubject
         'phone_verified_at' => 'datetime',
     ];
 
+
+    //--------- relations
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id', 'user_id');
+    }
+
     /**
      * Accessor to format the date when retrieved.
      *

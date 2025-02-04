@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard\Sections;
 
 use App\Rules\ProductExistsInBusinessType;
+use App\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSectionRequest extends FormRequest
@@ -36,5 +37,9 @@ class StoreSectionRequest extends FormRequest
                 new ProductExistsInBusinessType($this->business_type_id),
             ],
         ];
+    }
+    public function failedValidation($validator)
+    {
+        return ApiResponseTrait::failedValidation($validator, [], null, 422);
     }
 }
