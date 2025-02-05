@@ -190,7 +190,7 @@
                 success: function(response) {
                     console.log(response);
                     window.location.href = '{{ route('discounts.edit', $discount->discount_id) }}';
-                    toastr.success('{{ __('messages.added') }}');
+                    toastr.success('{{ __('messages.updated') }}');
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr.responseJSON);

@@ -80,6 +80,7 @@
             <form id="sectionForm" data-action="{{ route('sections.update', $section) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="col">
                         <label for="name">{{ ___('Section Name In Arabic') }}*</label>
@@ -181,8 +182,8 @@
                 processData: false,
                 success: function(response) {
                     console.log(response);
-                    window.location.href = '{{ route('sections.create') }}';
-                    toastr.success('{{ __('messages.added') }}');
+                    window.location.href = '{{ route('sections.index') }}';
+                    toastr.success('{{ __('messages.updated') }}');
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr.responseJSON);
@@ -217,74 +218,67 @@
     {{-- fetch products --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const businessTypeSelect = document.getElementById('exampleFormControlSelect1');
-            const productSelect = document.getElementById('exampleFormControlSelect2');
+    const businessTypeSelect = document.getElementById('exampleFormControlSelect1');
+    const productSelect = document.getElementById('exampleFormControlSelect2');
 
-            // Function to fetch products
-            const fetchProducts = async (businessTypeId) => {
-                // Clear previous options
-                productSelect.innerHTML =
-                    '<option value="" disabled>{{ ___('Loading products...') }}</option>';
-                productSelect.disabled = true;
+    // Function to fetch products
+    const fetchProducts = async (businessTypeId) => {
+        // Clear previous options
+        productSelect.innerHTML = '<option value="" disabled>{{ ___("Loading products...") }}</option>';
+        productSelect.disabled = true;
 
-                try {
-                    const response = await fetch(`/products/${businessTypeId}`);
-                    const {
-                        data,
-                        message,
-                        status
-                    } = await response.json();
+        try {
+            const response = await fetch(`/products/${businessTypeId}`);
+            const { data, message, status } = await response.json();
 
-                    if (status !== 200) {
-                        throw new Error(message || 'Failed to fetch products');
-                    }
-
-                    productSelect.innerHTML = '';
-
-                    if (data.length > 0) {
-                        data.forEach(product => {
-                            const isSelected = discountProductIds.includes(product.id);
-                            const option = new Option(
-                                product.name,
-                                product.id,
-                                false, // Not default selected
-                                isSelected // Mark as selected if in discountProductIds
-                            );
-                            productSelect.add(option);
-                        });
-
-                        // Reinitialize Select2 and set selected values
-                        $(productSelect).select2({
-                            placeholder: "{{ ___('Select products') }}",
-                            allowClear: true,
-                            theme: 'bootstrap-5',
-                            minimumResultsForSearch: Infinity
-                        }).val(discountProductIds).trigger('change');
-
-                        productSelect.disabled = false;
-                    } else {
-                        productSelect.innerHTML =
-                            `<option value="" disabled>{{ ___('No products available') }}</option>`;
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    productSelect.innerHTML =
-                        `<option value="" disabled>{{ ___('Error: ') }}${error.message}</option>`;
-                } finally {
-                    productSelect.disabled = false;
-                }
-            };
-
-            // Fetch products when business type changes
-            businessTypeSelect.addEventListener('change', async function() {
-                const businessTypeId = this.value;
-                await fetchProducts(businessTypeId);
-            });
-
-            // Fetch products on initial page load if business type is pre-selected
-            if (businessTypeSelect.value) {
-                fetchProducts(businessTypeSelect.value);
+            if (status !== 200) {
+                throw new Error(message || 'Failed to fetch products');
             }
-        });
+
+            productSelect.innerHTML = '';
+
+            if (data.length > 0) {
+                data.forEach(product => {
+                    const isSelected = discountProductIds.includes(product.id);
+                    const option = new Option(
+                        product.name,
+                        product.id,
+                        false, // Not default selected
+                        isSelected // Mark as selected if in discountProductIds
+                    );
+                    productSelect.add(option);
+                });
+
+                // Reinitialize Select2 and set selected values
+                $(productSelect).select2({
+                    placeholder: "{{ ___('Select products') }}",
+                    allowClear: true,
+                    theme: 'bootstrap-5',
+                    minimumResultsForSearch: Infinity
+                }).val(discountProductIds).trigger('change');
+
+                productSelect.disabled = false;
+            } else {
+                productSelect.innerHTML = `<option value="" disabled>{{ ___('No products available') }}</option>`;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            productSelect.innerHTML = `<option value="" disabled>{{ ___('Error: ') }}${error.message}</option>`;
+        } finally {
+            productSelect.disabled = false;
+        }
+    };
+
+    // Fetch products when business type changes
+    businessTypeSelect.addEventListener('change', async function() {
+        const businessTypeId = this.value;
+        await fetchProducts(businessTypeId);
+    });
+
+    // Fetch products on initial page load if business type is pre-selected
+    if (businessTypeSelect.value) {
+        fetchProducts(businessTypeSelect.value);
+    }
+});
     </script>
 @endsection

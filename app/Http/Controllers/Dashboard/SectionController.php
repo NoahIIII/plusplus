@@ -59,7 +59,11 @@ class SectionController extends Controller
     /**
      * update section
      */
-    public function update(UpdateSectionRequest $request, Section $section) {}
+    public function update(UpdateSectionRequest $request, Section $section) {
+        $service = $this->sectionService->updateService($section, $request->validated());
+        if ($service instanceof \Illuminate\Http\JsonResponse) return $service;
+        return ApiResponseTrait::successResponse([], __('messages.updated'));
+    }
 
     /**
      * destroy a section

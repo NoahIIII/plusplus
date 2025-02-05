@@ -28,7 +28,7 @@ class UpdateSectionRequest extends FormRequest
             'first_color'=>'required|string',
             'second_color'=>'required|string',
             'business_type_id'=>'required|numeric|exists:business_types,id',
-            'status'=>'nullable|boolean',
+            'status'=>'required|boolean',
             'product_ids'=>'required|array',
             'product_ids.*' => [
                 'required',
