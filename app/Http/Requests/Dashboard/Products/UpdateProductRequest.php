@@ -40,7 +40,7 @@ class UpdateProductRequest extends FormRequest
             'price' => 'required|numeric|min:1',
             'quantity' => 'required|numeric|min:1',
             'images' => 'nullable|array',
-            'images.*' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'images.*' => 'required|image|mimes:jpg,png,jpeg|max:2048',
             'deleted_media_ids'=>'nullable|array',
             'deleted_media_ids.*' => 'required|exists:product_media,id',
             'status' => 'nullable|boolean',
@@ -51,6 +51,7 @@ class UpdateProductRequest extends FormRequest
             'variants.*.price' => 'nullable|numeric|min:1',
             'variants.*.unit_quantity' => 'nullable|numeric|min:1',
             'variants.*.stock_quantity' => 'nullable|numeric|min:1',
+            'primary_image'=>'nullable|image|mimes:jpg,png,jpeg|max:2048',
         ];
     }
 

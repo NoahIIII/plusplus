@@ -40,7 +40,7 @@ class StoreProductRequest extends FormRequest
             'price' => 'required|numeric|min:1',
             'quantity' => 'required|numeric|min:1',
             'images' => 'required|array',
-            'images.*' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'images.*' => 'required|image|mimes:jpg,png,jpeg|max:2048',
             'status' => 'nullable|boolean',
             'variants' => 'nullable|array',
             'variants.*.package_type' => ['required', Rule::in(PackageType::values())],
@@ -48,6 +48,7 @@ class StoreProductRequest extends FormRequest
             'variants.*.price' => 'nullable|numeric|min:1',
             'variants.*.unit_quantity' => 'nullable|numeric|min:1',
             'variants.*.stock_quantity' => 'nullable|numeric|min:1',
+            'primary_image'=>'required|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }
 }

@@ -5,13 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductMedia extends Model
+class OfferProduct extends Model
 {
     use HasFactory;
-    protected $table = 'product_media';
-    protected $fillable = ['mediable_id','mediable_type', 'media'];
-
-    public function mediable()
+    public function productable()
     {
         return $this->morphTo();
     }

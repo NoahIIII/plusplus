@@ -202,4 +202,7 @@ return array (
   'select_product' => 'Select Product',
   'select_section_products' => 'Select Section Products',
   'edit_section' => 'Edit Section',
+  'product_media' => 'Product Media',
+  'product_primary_image' => 'Product Primary Image',
+  'primary_image' => 'Primary Image',
 );

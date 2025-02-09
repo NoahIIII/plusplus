@@ -51,4 +51,10 @@ class Discount extends Model
     {
         return Carbon::parse($this->attributes['end_date'])->format('Y-m-d');
     }
+    public function scopeValid($query)
+    {
+        return $query->where(function ($q) {
+            $q->Where('end_date', '>', Carbon::now());
+        });
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Public\SectionController;
 use App\Http\Controllers\Public\CategoryController;
 use App\Http\Controllers\Public\AccountController;
 use App\Http\Controllers\Public\AuthController;
@@ -39,6 +40,12 @@ Route::group(['prefix' => '/business-types'], function () {
 Route::group(['prefix' => '/categories', 'middleware' => 'user_authentication'], function () {
     Route::get('/', [CategoryController::class, 'getMainCategories']);
     Route::get('/children/{parentId}', [CategoryController::class, 'getChildCategories']);
+});
+
+//------------------------------------Section Routes ------------------------------------------------------
+Route::group(['prefix'=>'sections', 'middleware' => 'user_authentication'], function () {
+    Route::get('/', [SectionController::class, 'getAllSections']);
+    Route::get('products/{sectionId}', [SectionController::class, 'getSectionProducts']);
 });
 
 Route::get('/test', function () {

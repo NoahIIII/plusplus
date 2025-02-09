@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedFloat('price')->nullable();
             $table->unsignedInteger('quantity')->nullable();
             $table->boolean('status');
+            $table->string('primary_image')->nullable();
             $table->timestamps();
         });
     }

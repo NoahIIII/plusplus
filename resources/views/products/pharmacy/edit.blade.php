@@ -222,6 +222,19 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="custom-file">
+                                <input name="primary_image" type="file" class="custom-file-input" id="primaryImage" />
+                                <label class="custom-file-label" for="customFile">{{ ___('Primary Image') }}</label>
+                            </div>
+                            <div class="mb-3">
+                                <img id="currentImage" src="{{ getImageUrl($product->primary_image) }}" alt="Current Product Image" class="img-thumbnail" style="max-width: 150px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="custom-file">
                                 <input name="images[]" type="file" class="custom-file-input" id="customFile" multiple
                                     accept="image/*" />
                                 <label class="custom-file-label" for="customFile">{{ ___('Product Images') }}</label>
@@ -740,6 +753,19 @@
                     toggleClearButton();
                 });
             });
+        });
+    </script>
+    {{-- display primary image --}}
+    <script>
+        document.getElementById('primaryImage').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('currentImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 @endsection

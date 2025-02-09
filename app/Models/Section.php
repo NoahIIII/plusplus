@@ -23,6 +23,12 @@ class Section extends Model
         'second_color',
     ];
 
+    protected $hidden =[
+        'created_at',
+        'updated_at',
+        'status',
+    ];
+
     public function sectionProducts()
     {
         return $this->hasMany(SectionProduct::class, 'section_id');

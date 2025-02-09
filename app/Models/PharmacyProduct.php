@@ -20,7 +20,8 @@ class PharmacyProduct extends Model
         'description',
         'quantity',
         'price',
-        'status'
+        'status',
+        'primary_image',
     ];
 
     //-------------- relations
@@ -40,5 +41,13 @@ class PharmacyProduct extends Model
     public function sections()
     {
         return $this->morphMany(SectionProduct::class, 'productable');
+    }
+    //-------------- Accessors
+    public function getPrimaryImageAttribute($value)
+    {
+        if (request()->is('api/*')) {
+            return getImageUrl($value);
+        }
+        return $value;
     }
 }

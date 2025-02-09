@@ -182,7 +182,7 @@
                 processData: false,
                 success: function(response) {
                     console.log(response);
-                    window.location.href = '{{ route('sections.index') }}';
+                    window.location.href = '{{ route('sections.edit', $section->section_id) }}';
                     toastr.success('{{ __('messages.updated') }}');
                 },
                 error: function(xhr, status, error) {

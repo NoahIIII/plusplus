@@ -24,6 +24,7 @@ class ProductService
         // format product data
         $productData = $this->formatProductData($data);
 
+        $productData['product']['primary_image']= StorageService::storeImage($data['primary_image'], 'pharmacy-products', 'product-');
         try {
             // Start transaction
             DB::beginTransaction();
@@ -55,7 +56,11 @@ class ProductService
     {
         // format product data
         $productData = $this->formatProductData($data);
-
+        // handle the primary image
+        if (isset($data['primary_image'])) {
+            $productData['product']['primary_image'] = StorageService::storeImage($data['primary_image'], 'pharmacy-products', 'product-');
+            StorageService::deleteImage($product->primary_image);
+        }
         try {
             // Start transaction
             DB::beginTransaction();
@@ -179,6 +184,10 @@ class ProductService
         unset($data['product']['images']);
         unset($data['product']['variants']);
         unset($data['product']['categories']);
+        unset($data['name_en']);
+        unset($data['name_ar']);
+        unset($data['description_ar']);
+        unset($data['description_en']);
         $data['categories'];
         return $data;
     }
@@ -296,5 +305,12 @@ class ProductService
                 $product->packageTypes()->create($variant);
             }
         }
+    }
+    /**
+     * get product main image
+     */
+    public function getProductMainImage($product)
+    {
+        return $product->media()->where('type', 'main')->first();
     }
 }

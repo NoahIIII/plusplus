@@ -181,9 +181,18 @@
                             <div class="custom-file">
                                 <input name="images[]" type="file" class="custom-file-input" id="customFile" multiple
                                     accept="image/*" />
-                                <label class="custom-file-label" for="customFile">{{ ___('Product Images') }}</label>
+                                <label class="custom-file-label" for="customFile">{{ ___('Product Media') }}</label>
                             </div>
                             <div class="image-preview-container mt-3 row" id="imagePreview"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input name="primary_image" type="file" class="custom-file-input" id="primaryImage" />
+                                <label class="custom-file-label" for="customFile">{{ ___('Primary Image') }}</label>
+                            </div>
+                            <div class="image-preview-container mt-3 row" id="primaryImagePreview"></div>
                         </div>
                     </div>
                 </div>
@@ -559,5 +568,48 @@
             });
         }
         document.addEventListener('DOMContentLoaded', toggleClearButton);
+    </script>
+    {{-- display primary image --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // File input change handler
+            document.getElementById('primaryImage').addEventListener('change', function(e) {
+                // Update label text
+                const label = this.nextElementSibling;
+                label.textContent = this.files.length + ' files selected';
+
+                // Clear previous previews
+                const previewContainer = document.getElementById('primaryImagePreview');
+                previewContainer.innerHTML = '';
+
+                // Create image previews
+                Array.from(this.files).forEach((file, index) => {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        const div = document.createElement('div');
+                        div.className = 'col-md-2 mb-3';
+                        div.innerHTML = `
+                        <div class="card">
+                            <img src="${e.target.result}" class="card-img-top preview-image" alt="Preview">
+                            <div class="card-body p-2">
+                                <small class="text-muted">${file.name}</small>
+                            </div>
+                        </div>
+                    `;
+                        previewContainer.appendChild(div);
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            // Reset label when no files selected
+            document.getElementById('primaryImage').addEventListener('click', function() {
+                if (this.files.length === 0) {
+                    this.nextElementSibling.textContent = '{{ ___('Primary Image') }}';
+                }
+            });
+        });
     </script>
 @endsection

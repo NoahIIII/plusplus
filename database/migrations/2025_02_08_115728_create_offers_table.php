@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('discounts', function (Blueprint $table) {
-            $table->id('discount_id');
+        Schema::create('offers', function (Blueprint $table) {
+            $table->id('offer_id');
             $table->foreignId('business_type_id')
             ->constrained('business_types','id')
             ->onDelete('cascade');
-            $table->enum('type', ['percentage', 'fixed']);
-            $table->unsignedInteger('value');
-            $table->string('code')->nullable();
-            $table->boolean('status')->default(1);
-            $table->enum('apply_on', ['product','order']);
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->enum('type',['buy_one_get_one','buy_one_get_two','buy_one_get_discount']);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('discounts');
+        Schema::dropIfExists('offers');
     }
 };
