@@ -52,9 +52,13 @@ if (!function_exists('___')) {
 if (!function_exists('getImageUrl')) {
     function getImageUrl($image)
     {
+        if (filter_var($image, FILTER_VALIDATE_URL)) {
+            return $image;
+        }
         return $image ? asset('storage/images/' . $image) : null;
     }
 }
+
 
 /**
  * Store Image
@@ -68,14 +72,14 @@ if (!function_exists('storeImage')) {
     }
 }
 /**
-     * Check if the current route matches the given route or pattern.
-     *
-     * @param string|array $routes The route(s) or pattern(s) to check.
-     * @param string $class The class to return if the route matches.
-     * @return string
-     */
+ * Check if the current route matches the given route or pattern.
+ *
+ * @param string|array $routes The route(s) or pattern(s) to check.
+ * @param string $class The class to return if the route matches.
+ * @return string
+ */
 if (!function_exists('isActiveRoute')) {
-    function isActiveRoute($routes, $class = 'active',$slug=null)
+    function isActiveRoute($routes, $class = 'active', $slug = null)
     {
         $routes = (array) $routes; // Ensure $routes is an array
         foreach ($routes as $route) {
@@ -90,7 +94,6 @@ if (!function_exists('isActiveRoute')) {
             }
         }
         return '';
-
     }
 }
 
@@ -103,4 +106,3 @@ if (!function_exists('getBusinessType')) {
         return request()->segment(1);
     }
 }
-

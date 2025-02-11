@@ -29,6 +29,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'account', 'middleware' => 'user_authentication'], function () {
     Route::patch('/update', [AccountController::class, 'updateAccountDetails']);
     Route::patch('/update-business-type', [AccountController::class, 'updateBusinessType']);
+    Route::patch('/update-address', [AccountController::class, 'updateAddress']);
 });
 
 //------------------------------------ Business Types Routes ------------------------------------------------------

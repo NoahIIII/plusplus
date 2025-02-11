@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Public\Addresses\AddressRequest;
 use App\Http\Requests\Public\Auth\UpdateAccountRequest;
+use App\Models\Address;
 use App\Models\BusinessType;
 use App\Models\User;
 use App\Traits\ApiResponseTrait;
@@ -15,6 +17,8 @@ class AccountController extends Controller
 
     public function __construct()
     {
+        // there's a middleware to make sure the user is authenticated, make sure to apply it for all methods in this controller,
+        // i don't like to apply the middlewares in the controller tho.
         $this->userId = auth('users')->user()->user_id;
     }
 
@@ -41,6 +45,19 @@ class AccountController extends Controller
         // update business type
         $user->business_type_id = $request->business_type_id;
         $user->save();
+        return ApiResponseTrait::successResponse([], __('messages.updated'));
+    }
+    /**
+     * Update User  Addresses
+     * @param AddressRequest $request
+     */
+    public function updateAddress(AddressRequest $request)
+    {
+        $address = Address::firstOrCreate([
+            'user_id' => $this->userId,
+            'type' => $request->type,
+        ]);
+        $address->update($request->validated());
         return ApiResponseTrait::successResponse([], __('messages.updated'));
     }
 }

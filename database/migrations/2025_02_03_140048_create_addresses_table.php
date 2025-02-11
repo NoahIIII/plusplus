@@ -16,12 +16,12 @@ return new class extends Migration
             $table->foreignId('user_id')
             ->constrained('users','user_id')
             ->onDelete('cascade');
-            $table->string('address_long');
-            $table->string('address_lat');
+            $table->string('address_long')->nullable();
+            $table->string('address_lat')->nullable();
             $table->string('street')->nullable();
             $table->string('building')->nullable();
             $table->string('department')->nullable();
-            $table->enum('type',['home','essential','work','other']);
+            $table->enum('type',['default','home','essential','work','other']);
             $table->timestamps();
         });
     }
